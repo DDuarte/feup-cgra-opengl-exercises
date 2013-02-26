@@ -40,8 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>bin\</OutDir>
-    <LibraryPath>lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;D:\FEUP2013_2\CGRA\CGFlib_v2.3-src\CGFlib\lib;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib;D:\OpenGL\lib</LibraryPath>
-    <IncludePath>include\CGF;include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;D:\FEUP2013_2\CGRA\CGFlib_v2.3-src\CGFlib\include;D:\OpenGL\include;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include</IncludePath>
+    <LibraryPath>lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;D:\FEUP2013_2\CGRA\CGFlib_v2.3-src\CGFlib\lib;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib;D:\OpenGL\lib;C:\Program Files (x86)\Windows Kits\8.0\Lib\win8\um\x86;C:\Users\Hugo\Documents\Visual Studio 2012\Projects\Opengl\lib</LibraryPath>
+    <IncludePath>include\CGF;include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;D:\FEUP2013_2\CGRA\CGFlib_v2.3-src\CGFlib\include;D:\OpenGL\include;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;C:\Program Files (x86)\Windows Kits\8.0\Include\shared;C:\Program Files (x86)\Windows Kits\8.0\Include\um</IncludePath>
     <IntDir>..\buildtemp\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
