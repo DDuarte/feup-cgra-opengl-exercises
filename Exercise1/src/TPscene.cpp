@@ -46,8 +46,8 @@ void TPscene::display()
 	axis.draw();
 
     glPushMatrix();
-
-    glTranslatef(4.0f, 0.00f, 3.0f);
+	chair.draw();
+    /*glTranslatef(4.0f, 0.00f, 3.0f);
 
     floor.draw();
 
@@ -56,7 +56,7 @@ void TPscene::display()
     table.draw();
     glPopMatrix();
 
-
+	*/
 
     glPopMatrix();
 

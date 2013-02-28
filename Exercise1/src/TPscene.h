@@ -6,6 +6,7 @@
 //#include "myUnitCube.h"
 #include "myTable.h"
 #include "myFloor.h"
+#include "myChair.h"
 
 class TPscene : public CGFscene
 {
@@ -14,6 +15,7 @@ private:
     //myUnitCube cube;
     myTable table;
     myFloor floor;
+	myChair chair;
 public:
 	void init();
 	void display();
