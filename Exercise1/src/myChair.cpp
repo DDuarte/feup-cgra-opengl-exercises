@@ -39,11 +39,25 @@ void myChair::draw()
 
 	//PODIA ESCREVER ALGO PARVO MAS O DUDU NAO DEIXA... COSTAS//
 	glPushMatrix();
-	glTranslated(3.5/4,(3.5/2+0.3)/2 + 3.5/2+0.3,0);
+	glTranslated(3.5/4,(3.5/2+0.3)/4+2.9,0);
 	glRotated(90,-1,0,0);
-	glScalef(3.5/2+0.3, 0.3f, 3.5/2+0.3);
+	glScalef(3.5/2+0.3, 0.3f, (3.5/2+0.3)/2);
+	_cube.draw();
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glTranslated(0,3.5/8+3.5/2+ 0.3f,0);
+	glScalef(0.3f, 3.5/4, 0.3f);
+	_cube.draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(3.5/2,3.5/8+3.5/2+ 0.3f,0);
+	glScalef(0.3f, 3.5/4, 0.3f);
 	_cube.draw();
 	glPopMatrix();
 	//-----------------------------------//
+
 }
 
