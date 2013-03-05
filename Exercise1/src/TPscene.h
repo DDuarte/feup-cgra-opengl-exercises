@@ -15,10 +15,10 @@ private:
     //myUnitCube cube;
     myTable table;
     myFloor floor;
-	myChair chair;
+    myChair chair;
 public:
-	void init();
-	void display();
+    void init();
+    void display();
 };
 
 #endif

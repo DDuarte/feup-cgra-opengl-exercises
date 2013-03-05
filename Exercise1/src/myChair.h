@@ -6,9 +6,9 @@
 
 class myChair: public CGFobject
 {
-	myUnitCube _cube;
+    myUnitCube _cube;
 public:
-	void draw();
+    void draw();
 };
 
 #endif
