@@ -16,6 +16,9 @@ class myCylinder : public CGFobject
         double X;
         double Y;
         double Z;
+
+        Point Cross(const Point& vec);
+        Point operator -(const Point& vec);
     };
 
 private:

@@ -43,19 +43,47 @@ void myCylinder::draw()
         for (int j = 0 ; j < _slices; ++j)
         {
             glBegin(GL_POLYGON);
-            glVertex3d(_vertices[i][j].X,     _vertices[i][j].Y,     _vertices[i][j].Z);
+            
             if (j == _slices - 1)
             {
+                Point normal = (_vertices[i][0] - _vertices[i][j]).Cross(_vertices[i + 1][0] - _vertices[i][j]);
+                glNormal3d(normal.X, normal.Y, normal.Z);
+
+                glVertex3d(_vertices[i][j].X,     _vertices[i][j].Y,     _vertices[i][j].Z);
                 glVertex3d(_vertices[i][0].X,     _vertices[i][0].Y,     _vertices[i][0].Z);
                 glVertex3d(_vertices[i + 1][0].X, _vertices[i + 1][0].Y, _vertices[i + 1][0].Z);
+                glVertex3d(_vertices[i + 1][j].X, _vertices[i + 1][j].Y, _vertices[i + 1][j].Z);
             }
             else
             {
+                Point normal = (_vertices[i][j + 1] - _vertices[i][j]).Cross(_vertices[i + 1][j + 1] - _vertices[i][j]);
+                glNormal3d(normal.X, normal.Y, normal.Z);
+
+                glVertex3d(_vertices[i][j].X,         _vertices[i][j].Y,         _vertices[i][j].Z);
                 glVertex3d(_vertices[i][j + 1].X,     _vertices[i][j + 1].Y,     _vertices[i][j + 1].Z);
                 glVertex3d(_vertices[i + 1][j + 1].X, _vertices[i + 1][j + 1].Y, _vertices[i + 1][j + 1].Z);
+                glVertex3d(_vertices[i + 1][j].X,     _vertices[i + 1][j].Y,     _vertices[i + 1][j].Z);
             }
-            glVertex3d(_vertices[i + 1][j].X, _vertices[i + 1][j].Y, _vertices[i + 1][j].Z);
+            
             glEnd();
         }
     }
+}
+
+myCylinder::Point myCylinder::Point::Cross(const Point& vec)
+{
+    Point p;
+    p.X = Y * vec.Z - Z * vec.Y;
+    p.Y = Z * vec.X - X * vec.Z;
+    p.Z = X * vec.Y - Y * vec.X;
+    return p;
+}
+
+myCylinder::Point myCylinder::Point::operator-(const Point& vec)
+{
+    Point p;
+    p.X = X - vec.X;
+    p.Y = Y - vec.Y;
+    p.Z = Z - vec.Z;
+    return p;
 }
