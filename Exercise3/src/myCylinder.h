@@ -3,29 +3,29 @@
 
 #include "CGF/CGFobject.h"
 #include <vector>
-#include <cmath>
 
-#define PI       3.14159265358979323846
+#define _USE_MATH_DEFINES
+#include <math.h>
 
-struct Point
+class myCylinder : public CGFobject
 {
-    double x;
-    double y;
-    double z;
+    struct Point
+    {
+        Point(): X(0.0), Y(0.0), Z(0.0) {}
+        Point(double x, double y, double z): X(x), Y(y), Z(z) {}
+        double X;
+        double Y;
+        double Z;
+    };
 
-    Point(double x, double y, double z): x(x), y(y), z(z){}
-};
-
-
-
-class myCylinder : public CGFobject {
 private:
+    std::vector<std::vector<Point>> _vertices;
     int _slices;
     int _stacks;
-    std::vector<std::vector<Point> > vec;
+    bool _smooth;
 
 public:
-    myCylinder(int slices, int stacks/*, bool smooth*/);
+    myCylinder(int slices, int stacks, bool smooth = false);
     void draw();
 };
 
