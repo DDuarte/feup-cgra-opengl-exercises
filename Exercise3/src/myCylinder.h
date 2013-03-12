@@ -9,24 +9,24 @@
 
 struct Point
 {
-	double x;
-	double y;
-	double z;
+    double x;
+    double y;
+    double z;
 
-	Point(double x, double y, double z): x(x), y(y), z(z){}
+    Point(double x, double y, double z): x(x), y(y), z(z){}
 };
 
 
 
 class myCylinder : public CGFobject {
 private:
-	int _slices;
-	int _stacks;
-	std::vector<std::vector<Point> > vec;
+    int _slices;
+    int _stacks;
+    std::vector<std::vector<Point> > vec;
 
 public:
-	myCylinder(int slices, int stacks/*, bool smooth*/);
-	void draw();
+    myCylinder(int slices, int stacks/*, bool smooth*/);
+    void draw();
 };
 
 

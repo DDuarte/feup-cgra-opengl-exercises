@@ -600,8 +600,8 @@ public:
   inherits from this class; users should not allocate GLUT_Main objects.
   
   There's a separate GLUI_Main object for:
-  	- Each top-level window with GUI stuff in it.
-	- Each "subwindow" of another top-level window.
+      - Each top-level window with GUI stuff in it.
+    - Each "subwindow" of another top-level window.
 
   All the GLUI_Main objects are listed in GLUI_Master.gluis.
   A better name for this class might be "GLUI_Environment";
@@ -1460,20 +1460,20 @@ public:
                                 const char *name );
 
     GLUI_Listbox *add_listbox( const char *name, int *live_var=NULL,
-                               int id=-1, GLUI_CB callback=GLUI_CB()	);
+                               int id=-1, GLUI_CB callback=GLUI_CB()    );
     GLUI_Listbox *add_listbox_to_panel( GLUI_Panel *panel,
                                         const char *name, int *live_var=NULL,
                                         int id=-1, GLUI_CB callback=GLUI_CB());
 
     GLUI_Rotation *add_rotation( const char *name, float *live_var=NULL,
-                                 int id=-1, GLUI_CB callback=GLUI_CB()	);
+                                 int id=-1, GLUI_CB callback=GLUI_CB()    );
     GLUI_Rotation *add_rotation_to_panel( GLUI_Panel *panel,
                                           const char *name, float *live_var=NULL,
                                           int id=-1, GLUI_CB callback=GLUI_CB());
   
     GLUI_Translation *add_translation( const char *name,
                                        int trans_type, float *live_var=NULL,
-                                       int id=-1, GLUI_CB callback=GLUI_CB()	);
+                                       int id=-1, GLUI_CB callback=GLUI_CB()    );
     GLUI_Translation *add_translation_to_panel( 
         GLUI_Panel *panel, const char *name, 
         int trans_type, float *live_var=NULL,
@@ -1497,14 +1497,14 @@ public:
     GLUI_EditText  *add_edittext( const char *name, 
                                   int data_type=GLUI_EDITTEXT_TEXT,
                                   void*live_var=NULL,
-                                  int id=-1, GLUI_CB callback=GLUI_CB()	);
+                                  int id=-1, GLUI_CB callback=GLUI_CB()    );
     GLUI_EditText  *add_edittext_to_panel( GLUI_Panel *panel, 
                                            const char *name,
                                            int data_type=GLUI_EDITTEXT_TEXT,
                                            void *live_var=NULL, int id=-1, 
                                            GLUI_CB callback=GLUI_CB() );
     GLUI_EditText  *add_edittext( const char *name, GLUI_String& live_var, 
-                                  int id=-1, GLUI_CB callback=GLUI_CB()	);
+                                  int id=-1, GLUI_CB callback=GLUI_CB()    );
     GLUI_EditText  *add_edittext_to_panel( GLUI_Panel *panel, const char *name, 
                                            GLUI_String& live_var, int id=-1,
                                            GLUI_CB callback=GLUI_CB() );
@@ -1711,7 +1711,7 @@ public:
 
 public:
     int  key_handler( unsigned char key,int modifiers );
-    int  special_handler(	int key,int modifiers );
+    int  special_handler(    int key,int modifiers );
     void deactivate( void );
 
     virtual const char *get_history( int command_number ) const
@@ -2530,7 +2530,7 @@ public:
     float get_x( void ) {       return float_array_val[0];  }
     float get_y( void ) {
         if ( trans_type == GLUI_TRANSLATION_XY )    return float_array_val[1];
-        else					return float_array_val[0];
+        else                    return float_array_val[0];
     }
 
     void  set_z( float val );
@@ -2540,7 +2540,7 @@ public:
 
     GLUI_Translation( GLUI_Node *parent, const char *name,
                       int trans_type, float *live_var=NULL,
-                      int id=-1, GLUI_CB callback=GLUI_CB()	);
+                      int id=-1, GLUI_CB callback=GLUI_CB()    );
     GLUI_Translation( void ) { common_init(); }
 
 protected:

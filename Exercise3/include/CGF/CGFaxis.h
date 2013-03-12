@@ -23,23 +23,23 @@
 class CGFaxis: public CGFobject 
 /// This class implements three axis to show the use of the CGFobject class.
 {
-	public:
-		CGFaxis();		///< Base constructor. Sets up parameters and creates GLUquadric to use in rendering.
-		~CGFaxis();		///< Base destructor
-		void draw();	///< Drawing function. Renders three cones of different colors, using GLUquadrics, where the colors are matched to the cone direction: Red cone = X, Green = Y, Blue = Z
+    public:
+        CGFaxis();        ///< Base constructor. Sets up parameters and creates GLUquadric to use in rendering.
+        ~CGFaxis();        ///< Base destructor
+        void draw();    ///< Drawing function. Renders three cones of different colors, using GLUquadrics, where the colors are matched to the cone direction: Red cone = X, Green = Y, Blue = Z
 
-	protected:
-		double radius_begin;
-		double radius_end;
-		double lenght;
-		int nslices;
-		int nstacks;
+    protected:
+        double radius_begin;
+        double radius_end;
+        double lenght;
+        int nslices;
+        int nstacks;
 
-		double ball_radius;
-		int ball_slices;
-		int ball_stacks;
+        double ball_radius;
+        int ball_slices;
+        int ball_stacks;
 
-		GLUquadric* glu_quadric;
+        GLUquadric* glu_quadric;
 };
 
 #endif

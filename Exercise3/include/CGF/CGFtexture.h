@@ -15,22 +15,22 @@ using namespace std;
 class CGFtexture
 /// This class is used to load, store and refer textures in general. It is meant to be used in CGFappearance instances.
 {
-	public:
-		CGFtexture();					///< Basic contructor
-		CGFtexture(string);				///< Constructor for initializing the texture from a file (supports jpeg, png, bmp, among others, using stbi-1.33 - http://nothings.org/stb_image.c )
+    public:
+        CGFtexture();                    ///< Basic contructor
+        CGFtexture(string);                ///< Constructor for initializing the texture from a file (supports jpeg, png, bmp, among others, using stbi-1.33 - http://nothings.org/stb_image.c )
 
-		virtual ~CGFtexture();
+        virtual ~CGFtexture();
 
-		void apply();					///< Applies the texture (makes it active for whatever is rendered next)
+        void apply();                    ///< Applies the texture (makes it active for whatever is rendered next)
 
-	protected:
+    protected:
 
-		void loadTexture(string);
-		string texName;
+        void loadTexture(string);
+        string texName;
 
-		int texWidth, texHeight;
+        int texWidth, texHeight;
 
-		unsigned int texID;
+        unsigned int texID;
 };
 
 #endif
