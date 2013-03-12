@@ -5,6 +5,7 @@ void myUnitCube::draw()
     // front
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, 0.5f);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
     glPopMatrix();
 
@@ -12,6 +13,7 @@ void myUnitCube::draw()
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, -0.5f);
     glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
     glPopMatrix();
 
@@ -19,6 +21,7 @@ void myUnitCube::draw()
     glPushMatrix();
     glTranslatef(-0.5f, 0.0f, 0.0f);
     glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
     glPopMatrix();
 
@@ -26,6 +29,7 @@ void myUnitCube::draw()
     glPushMatrix();
     glTranslatef(0.5f, 0.0f, 0.0f);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
     glPopMatrix();
 
@@ -33,6 +37,7 @@ void myUnitCube::draw()
     glPushMatrix();
     glTranslatef(0.0f, 0.5f, 0.0f);
     glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
     glPopMatrix();
 
@@ -40,6 +45,7 @@ void myUnitCube::draw()
     glPushMatrix();
     glTranslatef(0.0f, -0.5f, 0.0f);
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+    glNormal3f(0.0f, 0.0f, 1.0f);
     glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
     glPopMatrix();
 }

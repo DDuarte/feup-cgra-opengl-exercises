@@ -7,7 +7,10 @@
 class myTable: public CGFobject {
 private:
     myUnitCube _unitCube;
+    float angle;
+    float transl;
 public:
+    myTable();
     void draw();
 };
 

@@ -7,6 +7,7 @@
 #include "myTable.h"
 #include "myFloor.h"
 #include "myChair.h"
+#include <vector>
 
 class TPscene : public CGFscene
 {
@@ -16,6 +17,10 @@ private:
     myTable table;
     myFloor floor;
     myChair chair;
+
+    std::vector<myChair> chairs;
+    std::vector<myTable> tables;
+
 public:
     void init();
     void display();

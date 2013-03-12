@@ -28,6 +28,8 @@ void TPscene::init()
 	// Defines a default normal
 	glNormal3f(0,0,1);
 
+    chairs.resize(20);
+    tables.resize(20);
 }
 
 void TPscene::display() 
@@ -46,19 +48,28 @@ void TPscene::display()
 	axis.draw();
 
     glPushMatrix();
-	chair.draw();
-    /*glTranslatef(4.0f, 0.00f, 3.0f);
-
+    glTranslatef(20.0f, 0.00f, 20.0f);
     floor.draw();
-
-    glPushMatrix();
-    glTranslatef(0.0f, 0.1f, 0.0f);
-    table.draw();
     glPopMatrix();
 
-	*/
+    int x = 0;
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            glPushMatrix();
+            glTranslatef(i * 10.0f + 5.0f, 0.1f, j * 10.0f + 5.0f);
+            tables[x].draw();
+            glPopMatrix();
 
-    glPopMatrix();
+            glPushMatrix();
+            glTranslatef(i * 10.0f + 4.0f, 0.1f, j * 10.0f + 2.0f);
+            chairs[x].draw();
+            glPopMatrix();
+
+            x++;
+        }
+    }
 
     // swap buffers
 	glutSwapBuffers();

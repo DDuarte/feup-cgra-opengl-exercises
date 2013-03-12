@@ -1,9 +1,0 @@
-Include:
-
-C:\Program Files (x86)\Windows Kits\8.0\Include\shared
-C:\Program Files (x86)\Windows Kits\8.0\Include\um
-
-Lib:
-
-C:\Program Files (x86)\Windows Kits\8.0\Lib\win8\um\x86
-C:\Users\Hugo\Documents\Visual Studio 2012\Projects\Opengl\lib

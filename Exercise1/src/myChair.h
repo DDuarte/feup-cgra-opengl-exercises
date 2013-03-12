@@ -7,7 +7,10 @@
 class myChair: public CGFobject
 {
     myUnitCube _cube;
+    float angle;
+    float transl;
 public:
+    myChair();
     void draw();
 };
 

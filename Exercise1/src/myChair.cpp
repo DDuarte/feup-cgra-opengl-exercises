@@ -1,7 +1,17 @@
 #include "myChair.h"
 
+myChair::myChair()
+{
+    angle = rand() % 41 - 20;
+    transl = rand() % 1 - 1;
+}
+
 void myChair::draw()
 {
+    glPushMatrix();
+    glRotatef(angle, 0.0f, 1.0f, 0.0f);
+    glTranslatef(transl, 0.0f, transl*0.5f);
+
     // Leg 1
     glPushMatrix();
     glTranslated(0,3.5/4,0);
@@ -58,5 +68,6 @@ void myChair::draw()
     glScalef(0.3f, 3.5/4, 0.3f);
     _cube.draw();
     glPopMatrix();
-}
 
+    glPopMatrix();
+}

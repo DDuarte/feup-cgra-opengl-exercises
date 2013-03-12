@@ -1,5 +1,11 @@
 #include "myTable.h"
 
+myTable::myTable()
+{
+    angle = rand() % 21 - 10;
+    transl = rand() % 1 - 1;
+}
+
 void myTable::draw() 
 {
     // -z
@@ -11,6 +17,10 @@ void myTable::draw()
     //    |               |
     //    |2             4|
     //    -----------------
+
+    glPushMatrix();
+    glRotatef(angle, 0.0f, 1.0f, 0.0f);
+    glTranslatef(transl, 0.0f, transl*0.5f);
 
     // table top
     glPushMatrix();
@@ -47,4 +57,5 @@ void myTable::draw()
     _unitCube.draw();
     glPopMatrix();
 
+    glPopMatrix();
 }
