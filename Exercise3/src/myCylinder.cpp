@@ -18,6 +18,7 @@ myCylinder::myCylinder(int slices, int stacks, bool smooth /*= false */) : _slic
         }
 
         z += 1.0/_stacks;
+        ang = 0.0;
     }
 }
 
@@ -40,12 +41,12 @@ void myCylinder::draw()
     // lateral faces
     for (int i = 0 ; i < _stacks - 1; ++i)
     {
-        Point ringCenter(0.5, 0.5, i * 1.0/_stacks);
+        const Point ringCenter(0.0, 0.0, i * 1.0/_stacks);
 
         for (int j = 0 ; j < _slices; ++j)
         {
             glBegin(GL_POLYGON);
-            
+
             if (j == _slices - 1)
             {
                 if (!_smooth)
@@ -74,7 +75,7 @@ void myCylinder::draw()
                 if (_smooth) (_vertices[i + 1][j] - ringCenter).glNormal();
                 _vertices[i + 1][j].glVertex();
             }
-            
+
             glEnd();
         }
     }
