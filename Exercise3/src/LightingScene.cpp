@@ -108,7 +108,8 @@ void LightingScene::init()
     wall = new Plane();
     boardA = new Plane(BOARD_A_DIVISIONS);
     boardB = new Plane(BOARD_B_DIVISIONS);
-    cylinder = new myCylinder(20, 20);
+    cylinderA = new myCylinder(20, 20, false);
+    cylinderB = new myCylinder(20, 20, true);
 
     ////Declares materials
     materialA = new CGFappearance(ambA,difA,specA,shininessA);
@@ -215,12 +216,22 @@ void LightingScene::display()
         boardB->draw();
     glPopMatrix();
 
+    //ColumnA
     glPushMatrix();
         glTranslated(9.0, 8.0, 3.0);
         glRotated(90.0, 1.0, 0.0, 0.0);
         glScaled(1.0, 1.0, 8.5);
         materialW->apply();
-        cylinder->draw();
+        cylinderA->draw();
+    glPopMatrix();
+
+    //ColumnB
+    glPushMatrix();
+        glTranslated(5.0, 8.0, 3.0);
+        glRotated(90.0, 1.0, 0.0, 0.0);
+        glScaled(1.0, 1.0, 8.5);
+        materialW->apply();
+        cylinderB->draw();
     glPopMatrix();
 
     // ---- END Primitive drawing section
@@ -244,7 +255,8 @@ LightingScene::~LightingScene()
     delete(wall);
     delete(boardA);
     delete(boardB);
-    delete(cylinder);
+    delete(cylinderA);
+    delete(cylinderB);
     delete(materialA);
     delete(materialB);
     delete(materialW);

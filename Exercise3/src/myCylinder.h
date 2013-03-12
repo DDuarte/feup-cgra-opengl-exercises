@@ -17,8 +17,12 @@ class myCylinder : public CGFobject
         double Y;
         double Z;
 
-        Point Cross(const Point& vec);
+        Point Cross(const Point& vec); // this is a point but it can also represent vectors
         Point operator -(const Point& vec);
+
+        // OpenGL helpers
+        void glVertex() const { glVertex3d(X, Y, Z); }
+        void glNormal() const { glNormal3d(X, Y, Z); }
     };
 
 private:

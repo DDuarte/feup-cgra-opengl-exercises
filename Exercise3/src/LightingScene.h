@@ -24,7 +24,8 @@ public:
     Plane* wall;
     Plane* boardA;
     Plane* boardB;
-    myCylinder* cylinder;
+    myCylinder* cylinderA;
+    myCylinder* cylinderB;
     CGFappearance* materialA;
     CGFappearance* materialB;
     CGFappearance* materialW;

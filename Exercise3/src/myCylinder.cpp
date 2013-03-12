@@ -27,42 +27,52 @@ void myCylinder::draw()
     glNormal3d(0.0, 0.0, -1.0);
     glBegin(GL_POLYGON);
     for (int i = _slices - 1; i >= 0; --i)
-        glVertex3d(_vertices[0][i].X , _vertices[0][i].Y , _vertices[0][i].Z);
+        _vertices[0][i].glVertex();
     glEnd();
 
     // top
     glNormal3d(0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     for (int i = 0; i < _slices; ++i)
-        glVertex3d(_vertices[_stacks-1][i].X , _vertices[_stacks-1][i].Y , _vertices[_stacks-1][i].Z);
+        _vertices[_stacks - 1][i].glVertex();
     glEnd();
 
     // lateral faces
     for (int i = 0 ; i < _stacks - 1; ++i)
     {
+        Point ringCenter(0.5, 0.5, i * 1.0/_stacks);
+
         for (int j = 0 ; j < _slices; ++j)
         {
             glBegin(GL_POLYGON);
             
             if (j == _slices - 1)
             {
-                Point normal = (_vertices[i][0] - _vertices[i][j]).Cross(_vertices[i + 1][0] - _vertices[i][j]);
-                glNormal3d(normal.X, normal.Y, normal.Z);
+                if (!_smooth)
+                    (_vertices[i][0] - _vertices[i][j]).Cross(_vertices[i + 1][0] - _vertices[i][j]).glNormal();
 
-                glVertex3d(_vertices[i][j].X,     _vertices[i][j].Y,     _vertices[i][j].Z);
-                glVertex3d(_vertices[i][0].X,     _vertices[i][0].Y,     _vertices[i][0].Z);
-                glVertex3d(_vertices[i + 1][0].X, _vertices[i + 1][0].Y, _vertices[i + 1][0].Z);
-                glVertex3d(_vertices[i + 1][j].X, _vertices[i + 1][j].Y, _vertices[i + 1][j].Z);
+                if (_smooth) (_vertices[i][j] - ringCenter).glNormal();
+                _vertices[i][j].glVertex();
+                if (_smooth) (_vertices[i][0] - ringCenter).glNormal();
+                _vertices[i][0].glVertex();
+                if (_smooth) (_vertices[i + 1][0] - ringCenter).glNormal();
+                _vertices[i + 1][0].glVertex();
+                if (_smooth) (_vertices[i + 1][j] - ringCenter).glNormal();
+                _vertices[i + 1][j].glVertex();
             }
             else
             {
-                Point normal = (_vertices[i][j + 1] - _vertices[i][j]).Cross(_vertices[i + 1][j + 1] - _vertices[i][j]);
-                glNormal3d(normal.X, normal.Y, normal.Z);
+                if (!_smooth)
+                    (_vertices[i][j + 1] - _vertices[i][j]).Cross(_vertices[i + 1][j + 1] - _vertices[i][j]).glNormal();
 
-                glVertex3d(_vertices[i][j].X,         _vertices[i][j].Y,         _vertices[i][j].Z);
-                glVertex3d(_vertices[i][j + 1].X,     _vertices[i][j + 1].Y,     _vertices[i][j + 1].Z);
-                glVertex3d(_vertices[i + 1][j + 1].X, _vertices[i + 1][j + 1].Y, _vertices[i + 1][j + 1].Z);
-                glVertex3d(_vertices[i + 1][j].X,     _vertices[i + 1][j].Y,     _vertices[i + 1][j].Z);
+                if (_smooth) (_vertices[i][j] - ringCenter).glNormal();
+                _vertices[i][j].glVertex();
+                if (_smooth) (_vertices[i][j + 1] - ringCenter).glNormal();
+                _vertices[i][j + 1].glVertex();
+                if (_smooth) (_vertices[i + 1][j + 1] - ringCenter).glNormal();
+                _vertices[i + 1][j + 1].glVertex();
+                if (_smooth) (_vertices[i + 1][j] - ringCenter).glNormal();
+                _vertices[i + 1][j].glVertex();
             }
             
             glEnd();
