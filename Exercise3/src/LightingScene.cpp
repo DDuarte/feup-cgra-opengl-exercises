@@ -218,7 +218,7 @@ void LightingScene::display()
     glPushMatrix();
         glTranslated(9.0, 8.0, 3.0);
         glRotated(90.0, 1.0, 0.0, 0.0);
-        glScaled(1.0, 1.0, 12.0);
+        glScaled(1.0, 1.0, 8.5);
         materialW->apply();
         cylinder->draw();
     glPopMatrix();
