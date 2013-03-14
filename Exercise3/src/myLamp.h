@@ -1,5 +1,5 @@
-#ifndef MY_CYLINDER
-#define MY_CYLINDER
+#ifndef MY_LAMP
+#define MY_LAMP
 
 #include "CGF/CGFobject.h"
 #include <vector>
@@ -8,16 +8,15 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-class myCylinder : public CGFobject
+class myLamp : public CGFobject
 {
 private:
     std::vector<std::vector<Point>> _vertices;
     int _slices;
     int _stacks;
-    bool _smooth;
 
 public:
-    myCylinder(int slices, int stacks, bool smooth = false);
+    myLamp(int slices, int stacks);
     void draw();
 };
 

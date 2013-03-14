@@ -7,6 +7,7 @@
 #include "myChair.h"
 #include "Plane.h"
 #include "myCylinder.h"
+#include "myLamp.h"
 
 class LightingScene : public CGFscene
 {
@@ -26,6 +27,7 @@ public:
     Plane* boardB;
     myCylinder* cylinderA;
     myCylinder* cylinderB;
+    myLamp* lamp;
     CGFappearance* materialA;
     CGFappearance* materialB;
     CGFappearance* materialW;
