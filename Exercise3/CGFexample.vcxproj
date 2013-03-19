@@ -72,6 +72,7 @@
     <ClCompile Include="src\LightingScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\myChair.cpp" />
+    <ClCompile Include="src\myComplexLamp.cpp" />
     <ClCompile Include="src\myCylinder.cpp" />
     <ClCompile Include="src\myFloor.cpp" />
     <ClCompile Include="src\myLamp.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="src\ExampleObject.h" />
     <ClInclude Include="src\LightingScene.h" />
     <ClInclude Include="src\myChair.h" />
+    <ClInclude Include="src\myComplexLamp.h" />
     <ClInclude Include="src\myCylinder.h" />
     <ClInclude Include="src\myFloor.h" />
     <ClInclude Include="src\myLamp.h" />

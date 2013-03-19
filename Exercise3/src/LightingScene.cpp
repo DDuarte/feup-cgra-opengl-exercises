@@ -108,9 +108,7 @@ void LightingScene::init()
     wall = new Plane();
     boardA = new Plane(BOARD_A_DIVISIONS);
     boardB = new Plane(BOARD_B_DIVISIONS);
-    cylinderA = new myCylinder(20, 20, false);
-    cylinderB = new myCylinder(20, 20, true);
-    lamp = new myLamp(20, 20);
+    lamp = new myComplexLamp(20, 20);
 
     ////Declares materials
     materialA = new CGFappearance(ambA,difA,specA,shininessA);
@@ -135,10 +133,10 @@ void LightingScene::display()
     // Apply transformations corresponding to the camera position relative to the origin
     CGFscene::activeCamera->applyView();
 
-    light0->draw();
-    light1->draw();
-    light2->draw();
-    light3->draw();
+    //light0->draw();
+    //light1->draw();
+    //light2->draw();
+    //light3->draw();
 
     // Draw axis
     axis.draw();
@@ -216,15 +214,16 @@ void LightingScene::display()
         boardB->draw();
     glPopMatrix();
 
+    /*
     //ColumnA
     glPushMatrix();
-        glTranslated(9.0, 8.0, 3.0);
-        glRotated(90.0, 1.0, 0.0, 0.0);
-        glScaled(1.0, 1.0, 8.5);
-        materialW->apply();
-        cylinderA->draw();
+        //glTranslated(9.0, 8.0, 3.0);
+        //glRotated(90.0, 1.0, 0.0, 0.0);
+        //glScaled(1.0, 1.0, 8.5);
+        //materialW->apply();
+        lamp->draw();
     glPopMatrix();
-
+    /*
     //ColumnB
     glPushMatrix();
         glTranslated(5.0, 8.0, 3.0);
@@ -233,13 +232,14 @@ void LightingScene::display()
         materialW->apply();
         cylinderB->draw();
     glPopMatrix();
+    */
 
     //Lamp
     glPushMatrix();
         glTranslated(5.0, 8.0, 7.0);
-        glRotated(90.0, 1.0, 0.0, 0.0);
-        //glScaled(15,1.0,1.0);
-        //materialF->apply();
+        //glRotated(90.0, 1.0, 0.0, 0.0);
+        glScaled(0.5, 0.5, 0.5);
+        materialF->apply();
         lamp->draw();
     glPopMatrix();
 
@@ -265,8 +265,6 @@ LightingScene::~LightingScene()
     delete(boardA);
     delete(boardB);
     delete(lamp);
-    delete(cylinderA);
-    delete(cylinderB);
     delete(materialA);
     delete(materialB);
     delete(materialW);

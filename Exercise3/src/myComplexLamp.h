@@ -1,6 +1,7 @@
 #ifndef MY_COMPLEX_LAMP
 #define MY_COMPLEX_LAMP
 
+#include "CGF/CGFlight.h"
 #include "myLamp.h"
 #include <vector>
 #include "Point.h"

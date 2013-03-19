@@ -12,7 +12,7 @@ myCylinder::myCylinder(int slices, int stacks, bool smooth /*= false */) : _slic
 
         for(int j = 0 ; j < _slices ; ++j)
         {
-            Point p(cos(ang),sin(ang),z);
+            Point p(cos(ang), sin(ang), z);
             _vertices[i][j] = p;
             ang += angle;
         }
