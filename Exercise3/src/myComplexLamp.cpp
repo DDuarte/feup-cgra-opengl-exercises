@@ -59,7 +59,7 @@ void myComplexLamp::draw()
 
     CGFlight light(GL_LIGHT4, pos);
     light.enable();
-    //light.draw();
+    light.draw();
 
     glPopMatrix();
 
