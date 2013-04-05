@@ -9,7 +9,8 @@ class CGFappearance;
 class myTable: public CGFobject {
 private:
     myUnitCube _unitCube;
-    CGFappearance* _wood;
+    //CGFappearance* _wood;
+    CGFappearance* tableAppearance;
     CGFappearance* _steel;
 public:
     myTable();

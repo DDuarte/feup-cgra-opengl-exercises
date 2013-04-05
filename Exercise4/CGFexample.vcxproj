@@ -78,6 +78,7 @@
     <ClCompile Include="src\myLamp.cpp" />
     <ClCompile Include="src\myTable.cpp" />
     <ClCompile Include="src\myUnitCube.cpp" />
+    <ClCompile Include="src\myWindow.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Point.cpp" />
   </ItemGroup>
@@ -91,6 +92,7 @@
     <ClInclude Include="src\myLamp.h" />
     <ClInclude Include="src\myTable.h" />
     <ClInclude Include="src\myUnitCube.h" />
+    <ClInclude Include="src\myWindow.h" />
     <ClInclude Include="src\Plane.h" />
     <ClInclude Include="src\Point.h" />
   </ItemGroup>

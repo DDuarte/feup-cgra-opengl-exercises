@@ -7,6 +7,7 @@
 #include "myChair.h"
 #include "Plane.h"
 #include "myComplexLamp.h"
+#include "myWindow.h"
 
 class LightingScene : public CGFscene
 {
@@ -18,10 +19,12 @@ public:
     CGFlight* light1;
     CGFlight* light2;
     CGFlight* light3;
+    CGFlight* light4;
 
     myTable* table;
     myChair* chair;
     Plane* wall;
+    myWindow* window;
     Plane* boardA;
     Plane* boardB;
     myComplexLamp* lamp;
@@ -30,6 +33,10 @@ public:
     CGFappearance* materialW;
     CGFappearance* materialF;
     CGFappearance* materialC;
+    CGFappearance* slidesAppearance;
+    CGFappearance* boardAppearance;
+    CGFappearance* windowAppearance;
+    CGFappearance* floorAppearance;
 
     ~LightingScene();
 };

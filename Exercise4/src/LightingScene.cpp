@@ -4,6 +4,8 @@
 #include "myTable.h"
 #include "Plane.h"
 
+#include <GL/glext.h> // needed for gl_clamp_to_edge on Windows
+
 #include <math.h>
 
 float pi = acos(-1.0);
@@ -18,6 +20,7 @@ float light1_pos[4] = {10.5, 6.0, 1.0, 1.0};
 
 float light2_pos[4] = {10.5, 6.0, 5.0, 1.0};
 float light3_pos[4] = {4, 6.0, 5.0, 1.0};
+float light4_pos[4] = {1.0, 4.0, 7.5, 1.0};
 
 // Global ambient light (do not confuse with ambient component of individual lights)
 float globalAmbientLight[4]= {0.0,0.0,0.0,1.0}; //{0.2,0.2,0.2,1.0};
@@ -29,23 +32,23 @@ float globalAmbientLight[4]= {0.0,0.0,0.0,1.0}; //{0.2,0.2,0.2,1.0};
 // Coefficients for material A
 float ambA[3] = {0.2, 0.2, 0.2};
 float difA[3] = {0.6, 0.6, 0.6};
-float specA[3] = {0.0, 0.8, 0.8}; /* {0.2, 0.2, 0.2} */
-float shininessA = 120.f; /* 10.f */
+float specA[3] = {0.2, 0.2, 0.2};
+float shininessA = 10.f;
 
 // Coefficients for material B
 float ambB[3] = {0.2, 0.2, 0.2};
-float difB[3] = {0.6, 0.6, 0.6};
-float specB[3] = {0.8, 0.8, 0.8};
+float difB[3] = {0.3, 0.3, 0.3};
+float specB[3] = {0.6, 0.6, 0.6};
 float shininessB = 120.f;
 
 // Coefficients for material F - floor
 float ambF[3] = {0.2, 0.2, 0.2};
-float difF[3] = {0.0, 0.3, 0.4};
+float difF[3] = {0.3, 0.3, 0.3};
 float specF[3] = {0.3, 0.3, 0.3};
 float shininessF = 10.f;
 
 // Coefficients for material W - walls
-float ambW[3] = {1, 1, 1};
+float ambW[3] = {0.5, 0.5, 0.5};
 float difW[3] = {0.5, 0.5, 0.5};
 float specW[3] = {0.3, 0.3, 0.3};
 float shininessW = 5.f;
@@ -96,6 +99,13 @@ void LightingScene::init()
     light3->setKq(0.2f);
     light3->enable();
 
+    light4 = new CGFlight(GL_LIGHT4, light4_pos);
+    light4->setAmbient(ambientNull);
+    light4->setKc(0.0f);
+    light4->setKl(1.0f);
+    light4->setKq(0.0f);
+    light4->enable();
+
     // Uncomment below to enable normalization of lighting normal vectors
     glEnable(GL_NORMALIZE);
 
@@ -106,6 +116,7 @@ void LightingScene::init()
     table = new myTable();
     chair = new myChair();
     wall = new Plane();
+    window = new myWindow();
     boardA = new Plane(BOARD_A_DIVISIONS);
     boardB = new Plane(BOARD_B_DIVISIONS);
     lamp = new myComplexLamp(20, 20);
@@ -116,6 +127,30 @@ void LightingScene::init()
     materialF = new CGFappearance(ambF,difF,specF,shininessF);
     materialW = new CGFappearance(ambW,difW,specW,shininessW);
     materialC = new CGFappearance(ambC,difC,specC,shininessC);
+
+    slidesAppearance = new CGFappearance("slides.png", GL_REPEAT, GL_REPEAT);
+    slidesAppearance->setAmbient(ambA);
+    slidesAppearance->setDiffuse(difA);
+    slidesAppearance->setSpecular(specA);
+    slidesAppearance->setShininess(shininessA);
+
+    boardAppearance = new CGFappearance("board.png", GL_REPEAT, GL_REPEAT);
+    boardAppearance->setAmbient(ambB);
+    boardAppearance->setDiffuse(difB);
+    boardAppearance->setSpecular(specB);
+    boardAppearance->setShininess(shininessB);
+
+    windowAppearance = new CGFappearance("window.png", GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+    windowAppearance->setAmbient(ambW);
+    windowAppearance->setDiffuse(difW);
+    windowAppearance->setSpecular(specW);
+    windowAppearance->setShininess(shininessW);
+
+    floorAppearance = new CGFappearance("floor.png", GL_REPEAT, GL_REPEAT);
+    floorAppearance->setAmbient(ambF);
+    floorAppearance->setDiffuse(difF);
+    floorAppearance->setSpecular(specF);
+    floorAppearance->setShininess(shininessF);
 }
 
 void LightingScene::display()
@@ -137,6 +172,7 @@ void LightingScene::display()
     //light1->draw();
     //light2->draw();
     //light3->draw();
+    //light4->draw();
 
     // Draw axis
     axis.draw();
@@ -173,17 +209,17 @@ void LightingScene::display()
     glPushMatrix();
         glTranslated(7.5,0,7.5);
         glScaled(15,0.2,15);
-        materialF->apply();
+        floorAppearance->apply();
         wall->draw();
     glPopMatrix();
 
     //LeftWall
     glPushMatrix();
-        glTranslated(0,4,7.5);
-        glRotated(-90.0,0,0,1);
-        glScaled(8,0.2,15);
-        materialW->apply();
-        wall->draw();
+        glTranslated(0, 8 / 2.0, (15 / 2.0));
+        glRotated(90, 0, 1, 0);
+        glScaled(15, 8, 1);
+        windowAppearance->apply();
+        window->draw();
     glPopMatrix();
 
     //PlaneWall
@@ -201,16 +237,17 @@ void LightingScene::display()
         glTranslated(4,4,0.2);
         glScaled(BOARD_WIDTH,BOARD_HEIGHT,1);
         glRotated(90.0,1,0,0);
-        materialA->apply();
+        //materialA->apply();
+        slidesAppearance->apply();
         boardA->draw();
     glPopMatrix();
 
-    //PlaneB
+    // Board B
     glPushMatrix();
         glTranslated(10.5,4,0.2);
         glScaled(BOARD_WIDTH,BOARD_HEIGHT,1);
         glRotated(90.0,1,0,0);
-        materialB->apply();
+        boardAppearance->apply();
         boardB->draw();
     glPopMatrix();
 
@@ -258,10 +295,12 @@ LightingScene::~LightingScene()
     delete(light1);
     delete(light2);
     delete(light3);
+    delete(light4);
 
     delete(chair);
     delete(table);
     delete(wall);
+    delete(window);
     delete(boardA);
     delete(boardB);
     delete(lamp);
@@ -270,4 +309,8 @@ LightingScene::~LightingScene()
     delete(materialW);
     delete(materialF);
     delete(materialC);
+    delete(slidesAppearance);
+    delete(boardAppearance);
+    delete(windowAppearance);
+    delete(floorAppearance);
 }

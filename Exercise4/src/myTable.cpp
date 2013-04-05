@@ -14,13 +14,17 @@ float shininessSteel = 150.f;
 
 myTable::myTable()
 {
-    _wood  = new CGFappearance(ambWood,difWood,specWood,shininessWood);
+    tableAppearance = new CGFappearance("table.png", GL_REPEAT, GL_REPEAT);
+    tableAppearance->setAmbient(ambWood);
+    tableAppearance->setDiffuse(difWood);
+    tableAppearance->setSpecular(specWood);
+    tableAppearance->setShininess(shininessWood);
     _steel = new CGFappearance(ambSteel,difSteel,specSteel,shininessSteel);
 }
 
 myTable::~myTable()
 {
-    delete(_wood);
+    delete(tableAppearance);
     delete(_steel);
 }
 
@@ -36,7 +40,8 @@ void myTable::draw()
     //    |2             4|
     //    -----------------
 
-    _wood->apply();
+    //_wood->apply();
+    tableAppearance->apply();
 
     // table top
     glPushMatrix();
