@@ -116,10 +116,11 @@ void LightingScene::init()
     table = new myTable();
     chair = new myChair();
     wall = new Plane();
-    window = new myWindow();
     boardA = new Plane(BOARD_A_DIVISIONS);
     boardB = new Plane(BOARD_B_DIVISIONS);
     lamp = new myComplexLamp(20, 20);
+    column = new myCylinder(20, 20, true);
+    sphere = new mySphere(20, 20);
 
     ////Declares materials
     materialA = new CGFappearance(ambA,difA,specA,shininessA);
@@ -151,7 +152,40 @@ void LightingScene::init()
     floorAppearance->setDiffuse(difF);
     floorAppearance->setSpecular(specF);
     floorAppearance->setShininess(shininessF);
+
+    marbleAppearance = new CGFappearance("marble.jpg", GL_REPEAT, GL_REPEAT);
+    marbleAppearance->setAmbient(ambF);
+    marbleAppearance->setDiffuse(difF);
+    marbleAppearance->setSpecular(specF);
+    marbleAppearance->setShininess(shininessF);
+
+    fancyAppearance = new CGFappearance("fancy.jpg", GL_REPEAT, GL_REPEAT);
+    fancyAppearance->setAmbient(ambF);
+    fancyAppearance->setDiffuse(difF);
+    fancyAppearance->setSpecular(specF);
+    fancyAppearance->setShininess(shininessF);
+
+    earthAppearance = new CGFappearance("earth.jpg", GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+    earthAppearance->setAmbient(ambF);
+    earthAppearance->setDiffuse(difF);
+    earthAppearance->setSpecular(specF);
+    earthAppearance->setShininess(shininessF);
+
+    woodAppearance = new CGFappearance("wood.jpg", GL_REPEAT, GL_REPEAT);
+    woodAppearance->setAmbient(ambF);
+    woodAppearance->setDiffuse(difF);
+    woodAppearance->setSpecular(specF);
+    woodAppearance->setShininess(shininessF);
 }
+
+static std::function<float(float)> defaultS = [](float s) -> float { return s; };
+static std::function<float(float)> defaultT = [](float t) -> float { return t; };
+
+static std::function<float(float)> windowS = [](float s) -> float { return 3*s - 1; };
+static std::function<float(float)> windowT = [](float t) -> float { return 3*t - 1; };
+
+static std::function<float(float)> floorS = [](float s) -> float { return s * 10; };
+static std::function<float(float)> floorT = [](float t) -> float { return t * 12; };
 
 void LightingScene::display()
 {
@@ -183,7 +217,7 @@ void LightingScene::display()
     //First Chair
     glPushMatrix();
         glTranslated(4,0,5);
-        materialC->apply();
+        woodAppearance->apply();
         chair->draw();
     glPopMatrix();
 
@@ -210,16 +244,17 @@ void LightingScene::display()
         glTranslated(7.5,0,7.5);
         glScaled(15,0.2,15);
         floorAppearance->apply();
-        wall->draw();
+        wall->draw(floorS, floorT);
     glPopMatrix();
 
     //LeftWall
     glPushMatrix();
-        glTranslated(0, 8 / 2.0, (15 / 2.0));
-        glRotated(90, 0, 1, 0);
-        glScaled(15, 8, 1);
+        glTranslated(0,4,7.5);
+        glRotated(-90.0,0,0,1);
+        glRotated(90.0,0,1,0);
+        glScaled(15,0.2,8);
         windowAppearance->apply();
-        window->draw();
+        wall->draw(windowS, windowT);
     glPopMatrix();
 
     //PlaneWall
@@ -228,7 +263,7 @@ void LightingScene::display()
         glRotated(90.0,1,0,0);
         glScaled(15,0.2,8);
         materialW->apply();
-        wall->draw();
+        wall->draw(defaultS, defaultT);
     glPopMatrix();
 
 
@@ -239,7 +274,7 @@ void LightingScene::display()
         glRotated(90.0,1,0,0);
         //materialA->apply();
         slidesAppearance->apply();
-        boardA->draw();
+        wall->draw(defaultS, defaultT);
     glPopMatrix();
 
     // Board B
@@ -248,36 +283,35 @@ void LightingScene::display()
         glScaled(BOARD_WIDTH,BOARD_HEIGHT,1);
         glRotated(90.0,1,0,0);
         boardAppearance->apply();
-        boardB->draw();
+        wall->draw(defaultS, defaultT);
     glPopMatrix();
 
-    /*
-    //ColumnA
+    //Column
     glPushMatrix();
-        //glTranslated(9.0, 8.0, 3.0);
-        //glRotated(90.0, 1.0, 0.0, 0.0);
-        //glScaled(1.0, 1.0, 8.5);
-        //materialW->apply();
-        lamp->draw();
-    glPopMatrix();
-    /*
-    //ColumnB
-    glPushMatrix();
-        glTranslated(5.0, 8.0, 3.0);
+        glTranslated(5.0, 8.0, 12.0);
         glRotated(90.0, 1.0, 0.0, 0.0);
         glScaled(1.0, 1.0, 8.5);
-        materialW->apply();
-        cylinderB->draw();
+        marbleAppearance->apply();
+        column->draw();
     glPopMatrix();
-    */
 
     //Lamp
     glPushMatrix();
         glTranslated(5.0, 8.0, 7.0);
         //glRotated(90.0, 1.0, 0.0, 0.0);
         glScaled(0.5, 0.5, 0.5);
-        materialF->apply();
+        fancyAppearance->apply();
         lamp->draw();
+    glPopMatrix();
+
+    //Globe
+    glPushMatrix();
+        glTranslated(4.0, 4.5, 8.0);
+        glRotated(-90.0, 0.0, 1.0, 0.0);
+        glRotated(180, 0.0, 0.0, 1.0);
+        glScaled(0.5, 0.5, 0.5);
+        earthAppearance->apply();
+        sphere->draw();
     glPopMatrix();
 
     // ---- END Primitive drawing section
@@ -297,10 +331,11 @@ LightingScene::~LightingScene()
     delete(light3);
     delete(light4);
 
+    delete(sphere);
+    delete(column);
     delete(chair);
     delete(table);
     delete(wall);
-    delete(window);
     delete(boardA);
     delete(boardB);
     delete(lamp);
@@ -313,4 +348,8 @@ LightingScene::~LightingScene()
     delete(boardAppearance);
     delete(windowAppearance);
     delete(floorAppearance);
+    delete(marbleAppearance);
+    delete(fancyAppearance);
+    delete(earthAppearance);
+    delete(woodAppearance);
 }

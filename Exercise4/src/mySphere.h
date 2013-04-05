@@ -1,25 +1,23 @@
-#ifndef MY_CYLINDER
-#define MY_CYLINDER
+#ifndef MY_SPHERE
+#define MY_SPHERE
 
 #include "CGF/CGFobject.h"
 #include <vector>
-#include <functional>
 #include "Point.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-class myCylinder : public CGFobject
+class mySphere : public CGFobject
 {
 private:
     std::vector<std::vector<Point>> _vertices;
     int _slices;
     int _stacks;
-    bool _smooth;
 
 public:
-    myCylinder(int slices, int stacks, bool smooth = false);
-    virtual void draw();
+    mySphere(int slices, int stacks);
+    void draw();
 };
 
 #endif

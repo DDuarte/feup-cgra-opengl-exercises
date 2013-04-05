@@ -74,11 +74,10 @@
     <ClCompile Include="src\myChair.cpp" />
     <ClCompile Include="src\myComplexLamp.cpp" />
     <ClCompile Include="src\myCylinder.cpp" />
-    <ClCompile Include="src\myFloor.cpp" />
     <ClCompile Include="src\myLamp.cpp" />
+    <ClCompile Include="src\mySphere.cpp" />
     <ClCompile Include="src\myTable.cpp" />
     <ClCompile Include="src\myUnitCube.cpp" />
-    <ClCompile Include="src\myWindow.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Point.cpp" />
   </ItemGroup>
@@ -88,11 +87,10 @@
     <ClInclude Include="src\myChair.h" />
     <ClInclude Include="src\myComplexLamp.h" />
     <ClInclude Include="src\myCylinder.h" />
-    <ClInclude Include="src\myFloor.h" />
     <ClInclude Include="src\myLamp.h" />
+    <ClInclude Include="src\mySphere.h" />
     <ClInclude Include="src\myTable.h" />
     <ClInclude Include="src\myUnitCube.h" />
-    <ClInclude Include="src\myWindow.h" />
     <ClInclude Include="src\Plane.h" />
     <ClInclude Include="src\Point.h" />
   </ItemGroup>

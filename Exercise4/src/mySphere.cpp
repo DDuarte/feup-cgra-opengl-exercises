@@ -1,10 +1,10 @@
-#include "myLamp.h"
+#include "mySphere.h"
 
-myLamp::myLamp(int slices, int stacks) : _slices(slices), _stacks(stacks), _vertices(stacks)
+mySphere::mySphere(int slices, int stacks) : _slices(slices), _stacks(stacks), _vertices(stacks)
 {
     const double thetainc = 2*M_PI / _slices;
     const double phiinc = 2*M_PI / _stacks;
-    
+
     double phi = 0.0;
 
     for (int i = 0; i < _stacks ; ++i)
@@ -12,7 +12,7 @@ myLamp::myLamp(int slices, int stacks) : _slices(slices), _stacks(stacks), _vert
         _vertices[i].resize(_slices);
 
         double theta = 0.0;
-        for (int j = 0 ; j < _slices && theta <= M_PI; ++j)
+        for (int j = 0 ; j < _slices; ++j)
         {
             Point p(cos(theta) * cos(phi), cos(theta) * sin(phi), sin(theta));
             _vertices[i][j] = p;
@@ -24,7 +24,7 @@ myLamp::myLamp(int slices, int stacks) : _slices(slices), _stacks(stacks), _vert
     }
 }
 
-void myLamp::draw()
+void mySphere::draw()
 {
     double s, t;
     Point p;

@@ -27,9 +27,6 @@
     <ClCompile Include="src\myTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\myFloor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\myChair.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,8 +48,8 @@
     <ClCompile Include="src\myComplexLamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\myWindow.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\mySphere.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\myTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\myFloor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\myChair.h">
@@ -89,7 +83,7 @@
     <ClInclude Include="src\myComplexLamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\myWindow.h">
+    <ClInclude Include="src\mySphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

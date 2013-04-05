@@ -5,9 +5,10 @@
 #include "CGFappearance.h"
 #include "myTable.h"
 #include "myChair.h"
+#include "myCylinder.h"
 #include "Plane.h"
 #include "myComplexLamp.h"
-#include "myWindow.h"
+#include "mySphere.h"
 
 class LightingScene : public CGFscene
 {
@@ -21,10 +22,11 @@ public:
     CGFlight* light3;
     CGFlight* light4;
 
+    mySphere* sphere;
+    myCylinder* column;
     myTable* table;
     myChair* chair;
     Plane* wall;
-    myWindow* window;
     Plane* boardA;
     Plane* boardB;
     myComplexLamp* lamp;
@@ -37,6 +39,10 @@ public:
     CGFappearance* boardAppearance;
     CGFappearance* windowAppearance;
     CGFappearance* floorAppearance;
+    CGFappearance* marbleAppearance;
+    CGFappearance* fancyAppearance;
+    CGFappearance* earthAppearance;
+    CGFappearance* woodAppearance;
 
     ~LightingScene();
 };

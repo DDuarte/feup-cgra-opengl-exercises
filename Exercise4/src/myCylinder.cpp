@@ -24,19 +24,34 @@ myCylinder::myCylinder(int slices, int stacks, bool smooth /*= false */) : _slic
 
 void myCylinder::draw()
 {
+    const float slicesf = (float)_slices;
+    const float stacksf = (float)_stacks;
+
     // bottom
     glNormal3d(0.0, 0.0, -1.0);
     glBegin(GL_POLYGON);
     for (int i = _slices - 1; i >= 0; --i)
+    {
+        glTexCoord2f(_vertices[0][i].X, _vertices[0][i].Y);
         _vertices[0][i].glVertex();
+    }
     glEnd();
 
     // top
     glNormal3d(0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     for (int i = 0; i < _slices; ++i)
+    {
+        glTexCoord2f(_vertices[_stacks - 1][i].X, _vertices[_stacks - 1][i].Y);
         _vertices[_stacks - 1][i].glVertex();
+    }
     glEnd();
+
+#ifndef helper
+#define helper(i, j) if (_smooth) (_vertices[i][j] - ringCenter).glNormal();              \
+                     glTexCoord2f(asin(_vertices[i][j].Y) / (2*M_PI), _vertices[i][j].Z);  \
+                     _vertices[i][j].glVertex();
+#endif
 
     // lateral faces
     for (int i = 0 ; i < _stacks - 1; ++i)
@@ -52,31 +67,25 @@ void myCylinder::draw()
                 if (!_smooth)
                     (_vertices[i][0] - _vertices[i][j]).Cross(_vertices[i + 1][0] - _vertices[i][j]).glNormal();
 
-                if (_smooth) (_vertices[i][j] - ringCenter).glNormal();
-                _vertices[i][j].glVertex();
-                if (_smooth) (_vertices[i][0] - ringCenter).glNormal();
-                _vertices[i][0].glVertex();
-                if (_smooth) (_vertices[i + 1][0] - ringCenter).glNormal();
-                _vertices[i + 1][0].glVertex();
-                if (_smooth) (_vertices[i + 1][j] - ringCenter).glNormal();
-                _vertices[i + 1][j].glVertex();
+                helper(i, j)
+                helper(i, 0)
+                helper(i + 1, 0)
+                helper(i + 1, j)
             }
             else
             {
                 if (!_smooth)
                     (_vertices[i][j + 1] - _vertices[i][j]).Cross(_vertices[i + 1][j + 1] - _vertices[i][j]).glNormal();
 
-                if (_smooth) (_vertices[i][j] - ringCenter).glNormal();
-                _vertices[i][j].glVertex();
-                if (_smooth) (_vertices[i][j + 1] - ringCenter).glNormal();
-                _vertices[i][j + 1].glVertex();
-                if (_smooth) (_vertices[i + 1][j + 1] - ringCenter).glNormal();
-                _vertices[i + 1][j + 1].glVertex();
-                if (_smooth) (_vertices[i + 1][j] - ringCenter).glNormal();
-                _vertices[i + 1][j].glVertex();
+                helper(i, j)
+                helper(i, j + 1)
+                helper(i + 1, j + 1)
+                helper(i + 1, j)
             }
 
             glEnd();
         }
     }
+
+#undef helper
 }
