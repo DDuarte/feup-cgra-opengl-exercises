@@ -1,5 +1,6 @@
 #include "myCylinder.h"
 
+
 myCylinder::myCylinder(int slices, int stacks, bool smooth /*= false */) : _slices(slices), _stacks(stacks), _smooth(smooth), _vertices(stacks)
 {
     const double angle = 2*M_PI / _slices;
@@ -27,13 +28,15 @@ void myCylinder::draw()
     const float slicesf = (float)_slices;
     const float stacksf = (float)_stacks;
 
+#define helper(i,j) glTexCoord2f( _vertices[i][j].X * 0.5 + 0.5, _vertices[i][j].Y * 0.5 + 0.5); \
+	_vertices[i][j].glVertex();
+
     // bottom
     glNormal3d(0.0, 0.0, -1.0);
     glBegin(GL_POLYGON);
     for (int i = _slices - 1; i >= 0; --i)
     {
-        glTexCoord2f(_vertices[0][i].X, _vertices[0][i].Y);
-        _vertices[0][i].glVertex();
+       helper(0,i);
     }
     glEnd();
 
@@ -42,11 +45,10 @@ void myCylinder::draw()
     glBegin(GL_POLYGON);
     for (int i = 0; i < _slices; ++i)
     {
-        glTexCoord2f(_vertices[_stacks - 1][i].X, _vertices[_stacks - 1][i].Y);
-        _vertices[_stacks - 1][i].glVertex();
+        helper(_stacks - 1 , i);
     }
     glEnd();
-
+#undef helper
 #ifndef helper
 #define helper(i, j) if (_smooth) (_vertices[i][j] - ringCenter).glNormal();              \
                      glTexCoord2f(asin(_vertices[i][j].Y) / (2*M_PI), _vertices[i][j].Z);  \

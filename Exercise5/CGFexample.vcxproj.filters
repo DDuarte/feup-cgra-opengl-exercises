@@ -51,6 +51,12 @@
     <ClCompile Include="src\mySphere.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\myClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\myClockHand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExampleObject.h">
@@ -84,6 +90,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\mySphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\myClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\myClockHand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

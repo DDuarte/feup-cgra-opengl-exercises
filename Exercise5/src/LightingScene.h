@@ -9,6 +9,7 @@
 #include "Plane.h"
 #include "myComplexLamp.h"
 #include "mySphere.h"
+#include "myClock.h"
 
 class LightingScene : public CGFscene
 {
@@ -30,6 +31,7 @@ public:
     Plane* boardA;
     Plane* boardB;
     myComplexLamp* lamp;
+	myClock* clock;
     CGFappearance* materialA;
     CGFappearance* materialB;
     CGFappearance* materialW;
