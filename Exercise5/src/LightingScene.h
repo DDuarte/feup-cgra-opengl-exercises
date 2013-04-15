@@ -10,6 +10,7 @@
 #include "myComplexLamp.h"
 #include "mySphere.h"
 #include "myClock.h"
+#include "myAirPlane.h"
 
 class LightingScene : public CGFscene
 {
@@ -32,6 +33,7 @@ public:
     Plane* boardB;
     myComplexLamp* lamp;
 	myClock* clock;
+	myAirplane* plane;
     CGFappearance* materialA;
     CGFappearance* materialB;
     CGFappearance* materialW;
@@ -45,6 +47,7 @@ public:
     CGFappearance* fancyAppearance;
     CGFappearance* earthAppearance;
     CGFappearance* woodAppearance;
+
 
     ~LightingScene();
 };

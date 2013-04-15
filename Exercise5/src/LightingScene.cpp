@@ -123,6 +123,7 @@ void LightingScene::init()
 	column = new myCylinder(20, 20, true);
 	sphere = new mySphere(20, 20);
 	clock = new myClock();
+	plane = new myAirplane();
 
 	////Declares materials
 	materialA = new CGFappearance(ambA,difA,specA,shininessA);
@@ -321,6 +322,14 @@ void LightingScene::display()
 	glTranslated(7.25,7.5,0.1);
 	clock->draw();
 	glPopMatrix();
+
+	//Plane
+	glPushMatrix();
+	glTranslated(-3,0,0);
+	plane->draw();
+	glPopMatrix();
+
+
 	// ---- END Primitive drawing section
 
 
