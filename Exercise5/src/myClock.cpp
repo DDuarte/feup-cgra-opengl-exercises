@@ -33,25 +33,32 @@ void myClock::draw()
     _seconds->draw();
     glPopMatrix();
 
-    _seconds->incAngle();
-
     glPushMatrix();
     _minutes->draw();
     glPopMatrix();
 
-    if((int)_seconds->getAngle() % 360 == 0)
-        _minutes->incAngle();
-
     glPushMatrix();
     _hours->draw();
     glPopMatrix();
-
-    if((int)_minutes->getAngle() % (360/5) == 0)
-        _hours->incAngle();
 
     glPushMatrix();
     glScaled(0.5, 0.5, 1.5);
     _clockAppearence->apply();
     _cyli->draw();
     glPopMatrix();
+}
+
+void myClock::update(unsigned long millis)
+{
+    unsigned long seconds = (millis / 1000) % 60;
+    unsigned long minutes = (millis / 1000 / 60) % 60;
+    unsigned long hours   = (millis / 1000 / 60 / 60) % 12;
+
+    float secs = seconds * (360.0f / 60.0f);
+    float mins = minutes * (360.0f / 60.0f) + secs / 60.0f;
+    float hrs = hours * (360.0f / 12.0f) + mins / 60.0f;
+
+    _seconds->setAngle(secs);
+    _minutes->setAngle(mins);
+    _hours->setAngle(hrs);
 }

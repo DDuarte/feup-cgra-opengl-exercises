@@ -179,6 +179,8 @@ void LightingScene::init()
     woodAppearance->setDiffuse(difF);
     woodAppearance->setSpecular(specF);
     woodAppearance->setShininess(shininessF);
+
+    setUpdatePeriod(100);
 }
 
 static std::function<float(float)> defaultS = [](float s) -> float { return s; };
@@ -372,4 +374,9 @@ LightingScene::~LightingScene()
     delete(woodAppearance);
     delete(clock);
     delete(plane);
+}
+
+void LightingScene::update(unsigned long millis)
+{
+    clock->update(millis);
 }
