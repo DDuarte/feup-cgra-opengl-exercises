@@ -15,6 +15,8 @@ float deg2rad=pi/180.0;
 #define BOARD_HEIGHT 6.0
 #define BOARD_WIDTH 6.4
 
+#define LIGHT_COUNT 5
+
 // Positions for two lights
 float light0_pos[4] = {4, 6.0, 1.0, 1.0};
 float light1_pos[4] = {10.5, 6.0, 1.0, 1.0};
@@ -125,6 +127,8 @@ void LightingScene::init()
     clock = new myClock();
     plane = new myAirplane();
 
+    robot = new MyRobot();
+
     ////Declares materials
     materialA = new CGFappearance(ambA,difA,specA,shininessA);
     materialB = new CGFappearance(ambB,difB,specB,shininessB);
@@ -182,6 +186,9 @@ void LightingScene::init()
 
     // scene
     sceneVar = 0;
+    
+    for (int i = 0; i < LIGHT_COUNT; ++i)
+        lightsSwitcher.push_back(1); // on
 }
 
 static std::function<float(float)> defaultS = [](float s) -> float { return s; };
@@ -208,11 +215,17 @@ void LightingScene::display()
     // Apply transformations corresponding to the camera position relative to the origin
     CGFscene::activeCamera->applyView();
 
-    //light0->draw();
-    //light1->draw();
-    //light2->draw();
-    //light3->draw();
-    //light4->draw();
+    lightsSwitcher[0] ? light0->enable() : light0->disable();
+    lightsSwitcher[1] ? light1->enable() : light1->disable();
+    lightsSwitcher[2] ? light2->enable() : light2->disable();
+    lightsSwitcher[3] ? light3->enable() : light3->disable();
+    lightsSwitcher[4] ? light4->enable() : light4->disable();
+
+    light0->update();
+    light1->update();
+    light2->update();
+    light3->update();
+    light4->update();
 
     // Draw axis
     axis.draw();
@@ -221,17 +234,17 @@ void LightingScene::display()
 
     // ---- BEGIN Primitive drawing section
     //First Chair
-    glPushMatrix();
-    glTranslated(4,0,5);
-    woodAppearance->apply();
-    chair->draw();
-    glPopMatrix();
-
-    //Second Chair
-    glPushMatrix();
-    glTranslated(11,0,5);
-    chair->draw();
-    glPopMatrix();
+    //glPushMatrix();
+    //glTranslated(4,0,5);
+    //woodAppearance->apply();
+    //chair->draw();
+    //glPopMatrix();
+    //
+    ////Second Chair
+    //glPushMatrix();
+    //glTranslated(11,0,5);
+    //chair->draw();
+    //glPopMatrix();
 
     //First Table
     glPushMatrix();
@@ -240,10 +253,10 @@ void LightingScene::display()
     glPopMatrix();
 
     //Second Table
-    glPushMatrix();
-    glTranslated(12,0,8);
-    table->draw();
-    glPopMatrix();
+    //glPushMatrix();
+    //glTranslated(12,0,8);
+    //table->draw();
+    //glPopMatrix();
 
     //Floor
     glPushMatrix();
@@ -302,23 +315,23 @@ void LightingScene::display()
     glPopMatrix();
 
     //Lamp
-    glPushMatrix();
-    glTranslated(5.0, 8.0, 7.0);
-    //glRotated(90.0, 1.0, 0.0, 0.0);
-    glScaled(0.5, 0.5, 0.5);
-    fancyAppearance->apply();
-    lamp->draw();
-    glPopMatrix();
+    //glPushMatrix();
+    //glTranslated(5.0, 8.0, 7.0);
+    ////glRotated(90.0, 1.0, 0.0, 0.0);
+    //glScaled(0.5, 0.5, 0.5);
+    //fancyAppearance->apply();
+    //lamp->draw();
+    //glPopMatrix();
 
     //Globe
-    glPushMatrix();
-    glTranslated(4.0, 4.5, 8.0);
-    glRotated(-90.0, 0.0, 1.0, 0.0);
-    glRotated(180, 0.0, 0.0, 1.0);
-    glScaled(0.5, 0.5, 0.5);
-    earthAppearance->apply();
-    sphere->draw();
-    glPopMatrix();
+    //glPushMatrix();
+    //glTranslated(4.0, 4.5, 8.0);
+    //glRotated(-90.0, 0.0, 1.0, 0.0);
+    //glRotated(180, 0.0, 0.0, 1.0);
+    //glScaled(0.5, 0.5, 0.5);
+    //earthAppearance->apply();
+    //sphere->draw();
+    //glPopMatrix();
 
     //Clock
     glPushMatrix();
@@ -327,11 +340,18 @@ void LightingScene::display()
     glPopMatrix();
 
     //Plane
+    //glPushMatrix();
+    //glTranslated(12.0, 4.15, 8.0);
+    //glRotated(90.0, 0.0, 1.0, 0.0);
+    //glScaled(0.5, 0.5, 0.5);
+    //plane->draw();
+    //glPopMatrix();
+
+    //Robot
     glPushMatrix();
-    glTranslated(12.0, 4.15, 8.0);
-    glRotated(90.0, 0.0, 1.0, 0.0);
-    glScaled(0.5, 0.5, 0.5);
-    plane->draw();
+    glTranslatef(robot->GetPosition().X, robot->GetPosition().Y, robot->GetPosition().Z);
+    glRotatef(robot->GetAngle(), 0.0f, 1.0f, 0.0f);
+    robot->draw();
     glPopMatrix();
 
 
@@ -375,4 +395,5 @@ LightingScene::~LightingScene()
     delete(woodAppearance);
     delete(clock);
     delete(plane);
+    delete(robot);
 }

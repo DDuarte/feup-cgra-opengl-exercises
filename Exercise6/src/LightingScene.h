@@ -11,6 +11,7 @@
 #include "mySphere.h"
 #include "myClock.h"
 #include "myAirPlane.h"
+#include "MyRobot.h"
 
 class LightingScene : public CGFscene
 {
@@ -23,6 +24,8 @@ public:
     CGFlight* light2;
     CGFlight* light3;
     CGFlight* light4;
+
+    MyRobot* robot;
 
     mySphere* sphere;
     myCylinder* column;
@@ -48,9 +51,16 @@ public:
     CGFappearance* earthAppearance;
     CGFappearance* woodAppearance;
 
+    std::vector<int> lightsSwitcher;
+
 public:
     void toggleSomething() { }
     int sceneVar;
+
+    void RobotRotateLeft() { robot->RotateLeft(); }
+    void RobotRotateRight() { robot->RotateRight(); }
+    void RobotMoveForward() { robot->MoveForward(); }
+    void RobotMoveBackward() { robot->MoveBackward(); }
 
     ~LightingScene();
 };
