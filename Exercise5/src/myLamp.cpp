@@ -4,7 +4,7 @@ myLamp::myLamp(int slices, int stacks) : _slices(slices), _stacks(stacks), _vert
 {
     const double thetainc = 2*M_PI / _slices;
     const double phiinc = 2*M_PI / _stacks;
-    
+
     double phi = 0.0;
 
     for (int i = 0; i < _stacks ; ++i)

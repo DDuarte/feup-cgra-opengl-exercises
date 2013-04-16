@@ -9,15 +9,15 @@
 class myClock : public CGFobject
 {
 private:
-	myCylinder* _cyli;
-	CGFappearance* _clockAppearence;
-	myClockHand* _seconds;
-	myClockHand* _minutes;
-	myClockHand* _hours;
+    myCylinder* _cyli;
+    CGFappearance* _clockAppearence;
+    myClockHand* _seconds;
+    myClockHand* _minutes;
+    myClockHand* _hours;
 public:
-	myClock();
-	~myClock();
-	virtual void draw();
+    myClock();
+    ~myClock();
+    virtual void draw();
 };
 
 #endif

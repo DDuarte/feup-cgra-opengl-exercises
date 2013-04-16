@@ -34,7 +34,7 @@ void Plane::draw(std::function<float(float)> sfunc, std::function<float(float)> 
             glBegin(GL_TRIANGLE_STRIP);
                 glTexCoord2f(sfunc(bx / numDivisionsf), tfunc(0));
                 glVertex3f(bx, 0, 0);
-                
+
                 for (int bz = 0; bz<_numDivisions; bz++)
                 {
                     glTexCoord2f(sfunc((bx + 1) / numDivisionsf), tfunc(bz / numDivisionsf));

@@ -28,7 +28,7 @@ myTable::~myTable()
     delete(_steel);
 }
 
-void myTable::draw() 
+void myTable::draw()
 {
     // -z
     //  ^         5

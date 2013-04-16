@@ -32,8 +32,8 @@ public:
     Plane* boardA;
     Plane* boardB;
     myComplexLamp* lamp;
-	myClock* clock;
-	myAirplane* plane;
+    myClock* clock;
+    myAirplane* plane;
     CGFappearance* materialA;
     CGFappearance* materialB;
     CGFappearance* materialW;

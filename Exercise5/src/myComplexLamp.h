@@ -11,13 +11,13 @@
 class myComplexLamp : public CGFobject
 {
 private:
-	myLamp _lamp;
-	myUnitCube _cube;
-	myCylinder _cyli;
+    myLamp _lamp;
+    myUnitCube _cube;
+    myCylinder _cyli;
 
 public:
-	myComplexLamp(int slices, int stacks) : _lamp(slices,stacks) , _cube() , _cyli(slices, stacks, true){}
-	void draw();
+    myComplexLamp(int slices, int stacks) : _lamp(slices,stacks) , _cube() , _cyli(slices, stacks, true){}
+    void draw();
 };
 
 #endif

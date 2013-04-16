@@ -29,7 +29,7 @@ void myCylinder::draw()
     const float stacksf = (float)_stacks;
 
 #define helper(i,j) glTexCoord2f( _vertices[i][j].X * 0.5 + 0.5, _vertices[i][j].Y * 0.5 + 0.5); \
-	_vertices[i][j].glVertex();
+    _vertices[i][j].glVertex();
 
     // bottom
     glNormal3d(0.0, 0.0, -1.0);

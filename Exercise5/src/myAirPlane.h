@@ -5,7 +5,7 @@
 
 class myAirplane: public CGFobject {
 public:
-	void draw();
+    void draw();
 };
 
 #endif
