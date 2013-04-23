@@ -16,6 +16,8 @@ myClock::myClock()
     _clockAppearence->setDiffuse(difClock);
     _clockAppearence->setShininess(shininessClock);
     _clockAppearence->setSpecular(specClock);
+
+    _paused = false;
 }
 
 myClock::~myClock()
@@ -50,6 +52,9 @@ void myClock::draw()
 
 void myClock::update(unsigned long millis)
 {
+    if (_paused)
+        return;
+
     unsigned long seconds = (millis / 1000) % 60;
     unsigned long minutes = (millis / 1000 / 60) % 60;
     unsigned long hours   = (millis / 1000 / 60 / 60) % 12;

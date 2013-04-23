@@ -11,8 +11,9 @@ struct Point
     double Y;
     double Z;
 
-    Point Cross(const Point& vec); // this is a point but it can also represent vectors
-    Point operator -(const Point& vec);
+    Point Cross(const Point& vec) const; // this is a point but it can also represent vectors
+    Point operator -(const Point& vec) const;
+    Point GetNormalized() const;
 
     // OpenGL helpers
     void glVertex() const { glVertex3d(X, Y, Z); }

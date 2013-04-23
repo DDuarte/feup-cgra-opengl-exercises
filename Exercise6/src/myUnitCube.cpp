@@ -9,9 +9,9 @@
              glVertex3f(0.5f, 0.5f, 0.0f);   \
              glTexCoord2f(0.0f, 1.0f);       \
              glVertex3f(-0.5f, 0.5f, 0.0f);  \
-             glEnd();                        
+             glEnd();
 
-void myUnitCube::draw() 
+void myUnitCube::draw()
 {
     // front
     glPushMatrix();

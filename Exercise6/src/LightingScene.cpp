@@ -184,11 +184,9 @@ void LightingScene::init()
     woodAppearance->setSpecular(specF);
     woodAppearance->setShininess(shininessF);
 
-    // scene
-    sceneVar = 0;
-    
     for (int i = 0; i < LIGHT_COUNT; ++i)
         lightsSwitcher.push_back(1); // on
+
     setUpdatePeriod(100);
 }
 
@@ -354,7 +352,6 @@ void LightingScene::display()
     glRotatef(robot->GetAngle(), 0.0f, 1.0f, 0.0f);
     robot->draw();
     glPopMatrix();
-
 
     // ---- END Primitive drawing section
 

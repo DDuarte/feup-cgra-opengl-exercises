@@ -1,6 +1,6 @@
-/* 
+/*
  * G0_Base: projeto inicial de CGra
- * 
+ *
  */
 
 #include <iostream>
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
         LightingScene* scene = new LightingScene();
         app.setScene(scene);
         app.setInterface(new TPinterface());
-        
+
         app.run();
     }
     catch(GLexception& ex) {

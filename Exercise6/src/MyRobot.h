@@ -13,9 +13,8 @@
 class MyRobot : public CGFobject
 {
 private:
-
-	std::vector<std::vector<Point>> _vertices;
-	int _stacks;
+    std::vector<std::vector<Point>> _vertices;
+    int _stacks;
 
     Point _position;
     float _angle;
@@ -27,8 +26,8 @@ public:
     void RotateRight() { SetAngle(_angle - ANGLE_INC); }
     void MoveForward() { _position.X += POS_INC * sin(_radAngle); _position.Z += POS_INC * cos(_radAngle); }
     void MoveBackward() { _position.X -= POS_INC * sin(_radAngle); _position.Z -= POS_INC * cos(_radAngle); }
-	void MoveUp()  { _position.Y += POS_INC; }
-	void MoveDown()  { _position.Y -= POS_INC; }
+    void MoveUp()  { _position.Y += POS_INC; }
+    void MoveDown()  { _position.Y -= POS_INC; }
 
     float GetAngle() const { return _angle; }
     const Point& GetPosition() const { return  _position; }

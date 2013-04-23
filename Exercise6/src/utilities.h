@@ -7,7 +7,7 @@
 
 inline double rad(double ang)
 {
-	return ang * M_PI / 180;
+    return ang * M_PI / 180;
 }
 
 #endif

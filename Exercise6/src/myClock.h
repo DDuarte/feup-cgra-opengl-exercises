@@ -14,11 +14,16 @@ private:
     myClockHand* _seconds;
     myClockHand* _minutes;
     myClockHand* _hours;
+
+    bool _paused;
+
 public:
     myClock();
     ~myClock();
-    virtual void draw();
+    virtual void draw() override;
     void update(unsigned long millis);
+
+    void PauseReboot() { _paused ^= true; }
 };
 
 #endif

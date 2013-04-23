@@ -55,15 +55,14 @@ public:
     std::vector<int> lightsSwitcher;
 
 public:
-    void toggleSomething() { }
-    int sceneVar;
+    void PauseRebootClock() { clock->PauseReboot(); }
 
     void RobotRotateLeft() { robot->RotateLeft(); }
     void RobotRotateRight() { robot->RotateRight(); }
     void RobotMoveForward() { robot->MoveForward(); }
     void RobotMoveBackward() { robot->MoveBackward(); }
-	void RobotMoveUp()  { robot->MoveUp(); }
-	void RobotMoveDown() { robot->MoveDown(); }
+    void RobotMoveUp()  { robot->MoveUp(); }
+    void RobotMoveDown() { robot->MoveDown(); }
 
     ~LightingScene();
 };
