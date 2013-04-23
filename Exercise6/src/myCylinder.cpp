@@ -1,6 +1,5 @@
 #include "myCylinder.h"
 
-
 myCylinder::myCylinder(int slices, int stacks, bool smooth /*= false */) : _slices(slices), _stacks(stacks), _smooth(smooth), _vertices(stacks)
 {
     const double angle = 2*M_PI / _slices;

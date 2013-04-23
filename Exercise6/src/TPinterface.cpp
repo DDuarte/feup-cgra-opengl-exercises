@@ -38,6 +38,18 @@ void TPinterface::processKeyboard(unsigned char key, int x, int y)
             ((LightingScene *) scene)->RobotMoveBackward();
             break;
         }
+		case 'o':
+		case 'O':
+		{
+			((LightingScene *) scene)->RobotMoveUp();
+			break;
+		}
+		case 'p':
+		case 'P':
+		{
+			((LightingScene *) scene)->RobotMoveDown();
+			break;
+		}
 	}
 }
 

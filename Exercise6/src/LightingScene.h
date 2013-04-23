@@ -62,6 +62,8 @@ public:
     void RobotRotateRight() { robot->RotateRight(); }
     void RobotMoveForward() { robot->MoveForward(); }
     void RobotMoveBackward() { robot->MoveBackward(); }
+	void RobotMoveUp()  { robot->MoveUp(); }
+	void RobotMoveDown() { robot->MoveDown(); }
 
     ~LightingScene();
 };

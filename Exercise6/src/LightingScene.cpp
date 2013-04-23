@@ -127,7 +127,7 @@ void LightingScene::init()
     clock = new myClock();
     plane = new myAirplane();
 
-    robot = new MyRobot();
+    robot = new MyRobot(10);
 
     ////Declares materials
     materialA = new CGFappearance(ambA,difA,specA,shininessA);
