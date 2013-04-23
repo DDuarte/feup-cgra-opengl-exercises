@@ -18,6 +18,7 @@ public:
     myClock();
     ~myClock();
     virtual void draw();
+    void update(unsigned long millis);
 };
 
 #endif

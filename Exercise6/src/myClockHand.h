@@ -14,8 +14,9 @@ public:
     myClockHand(float n);
     ~myClockHand();
     virtual void draw();
-    void incAngle(){++_angle;}
-    float getAngle(){return _angle;}
+    void incAngle(float inc) { _angle += inc; }
+    float getAngle() const {return _angle;}
+    void setAngle(float angle) { _angle = angle; }
 private:
 
 };

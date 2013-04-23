@@ -55,3 +55,18 @@ void myClock::draw()
     _cyli->draw();
     glPopMatrix();
 }
+
+void myClock::update(unsigned long millis)
+{
+    unsigned long seconds = (millis / 1000) % 60;
+    unsigned long minutes = (millis / 1000 / 60) % 60;
+    unsigned long hours   = (millis / 1000 / 60 / 60) % 12;
+
+    float secs = seconds * (360.0f / 60.0f);
+    float mins = minutes * (360.0f / 60.0f) + secs / 60.0f;
+    float hrs = hours * (360.0f / 12.0f) + mins / 60.0f;
+
+    _seconds->setAngle(secs);
+    _minutes->setAngle(mins);
+    _hours->setAngle(hrs);
+}

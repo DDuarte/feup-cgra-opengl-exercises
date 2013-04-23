@@ -189,6 +189,7 @@ void LightingScene::init()
     
     for (int i = 0; i < LIGHT_COUNT; ++i)
         lightsSwitcher.push_back(1); // on
+    setUpdatePeriod(100);
 }
 
 static std::function<float(float)> defaultS = [](float s) -> float { return s; };
@@ -396,4 +397,8 @@ LightingScene::~LightingScene()
     delete(clock);
     delete(plane);
     delete(robot);
+
+void LightingScene::update(unsigned long millis)
+{
+    clock->update(millis);
 }
