@@ -397,6 +397,7 @@ LightingScene::~LightingScene()
     delete(clock);
     delete(plane);
     delete(robot);
+}
 
 void LightingScene::update(unsigned long millis)
 {

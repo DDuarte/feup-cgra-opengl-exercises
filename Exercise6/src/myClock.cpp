@@ -33,21 +33,13 @@ void myClock::draw()
     _seconds->draw();
     glPopMatrix();
 
-    _seconds->incAngle();
-
     glPushMatrix();
     _minutes->draw();
     glPopMatrix();
 
-    if((int)_seconds->getAngle() % 360 == 0)
-        _minutes->incAngle();
-
     glPushMatrix();
     _hours->draw();
     glPopMatrix();
-
-    if((int)_minutes->getAngle() % (360/5) == 0)
-        _hours->incAngle();
 
     glPushMatrix();
     glScaled(0.5, 0.5, 1.5);
