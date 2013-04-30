@@ -2,6 +2,7 @@
 #define MYROBOT_H_
 
 #include "CGFobject.h"
+#include "CGFappearance.h"
 #include "Point.h"
 #include <vector>
 
@@ -22,8 +23,11 @@ private:
     float _angle;
     float _radAngle;
 
+    CGFappearance* _skin;
+
 public:
     MyRobot(int stacks);
+    ~MyRobot();
     void RotateLeft() { SetAngle(_angle + ANGLE_INC); }
     void RotateRight() { SetAngle(_angle - ANGLE_INC); }
     void MoveForward() { _position.X += POS_INC * sin(_radAngle); _position.Z += POS_INC * cos(_radAngle); }

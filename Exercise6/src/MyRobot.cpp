@@ -8,8 +8,19 @@
 #define RADIUS 0.25f
 #define SLICES 12
 
+float ambR[3] = {0.2, 0.2, 0.2};
+float difR[3] = {0.6, 0.6, 0.6};
+float specR[3] = {0.2, 0.2, 0.2};
+float shininessR = 10.f;
+
 MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 {
+    _skin = new CGFappearance("robot1.jpg", GL_CLAMP, GL_CLAMP);
+    _skin->setAmbient(ambR);
+    _skin->setDiffuse(difR);
+    _skin->setSpecular(specR);
+    _skin->setShininess(shininessR);
+
     SetAngle(200.0f);
     _vertices.resize(_stacks);
     Point p;
@@ -92,23 +103,39 @@ MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
     }
 }
 
+MyRobot::~MyRobot()
+{
+    delete _skin;
+}
+
 void MyRobot::draw()
 {
+    _skin->apply();
+
     // base (square)
     glBegin(GL_QUADS);
     glNormal3f(0.0f, -1.0f, 0.0f);
     for (int i = 3; i >= 0; --i)
+    {
+        glTexCoord2f(0.5 + _vertices[0][i*3].X, 0.5 - _vertices[0][i*3].Z);
         _vertices[0][i*3].glVertex();
+    }
     glEnd();
 
     // top (circle)
     glBegin(GL_POLYGON);
     glNormal3f(0.0f, 1.0f, 0.0f);
     for (int i = 0; i < SLICES; i++)
+    {
+        glTexCoord2f(0.5 + _vertices[_stacks - 1][i].X * 0.25, 0.5 - _vertices[_stacks - 1][i].Z * 0.25);
         _vertices[_stacks - 1][i].glVertex();
+    }
     glEnd();
 
     std::vector<Point> points(4);
+
+#define helper(i, j) glTexCoord2f(0.5 + _vertices[i][j].X, 0.5 - _vertices[i][j].Z); \
+                   _vertices[i][j].glVertex();
 
     // sides
     for (int i = 0; i < _stacks; ++i)
@@ -117,11 +144,15 @@ void MyRobot::draw()
         {
             glBegin(GL_POLYGON);
             _normals[i * SLICES + j].glNormal();
-            _vertices[i][j].glVertex();
-            _vertices[i][(j + 1) % SLICES].glVertex();
-            _vertices[(i + 1) % _stacks][(j + 1) % SLICES].glVertex();
-            _vertices[(i + 1) % _stacks][j].glVertex();
+
+            helper(i, j);
+            helper(i, (j + 1) % SLICES);
+            helper((i + 1) % _stacks, (j + 1) % SLICES);
+            helper((i + 1) % _stacks, j);
+
             glEnd();
         }
     }
+
+#undef helper
 }
