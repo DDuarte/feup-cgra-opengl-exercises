@@ -127,7 +127,7 @@ void MyRobot::draw()
     glNormal3f(0.0f, 1.0f, 0.0f);
     for (int i = 0; i < SLICES; i++)
     {
-        glTexCoord2f(0.5 + _vertices[_stacks - 1][i].X * 0.25, 0.5 - _vertices[_stacks - 1][i].Z * 0.25);
+        glTexCoord2f(0.5 + _vertices[_stacks - 1][i].X, 0.5 - _vertices[_stacks - 1][i].Z);
         _vertices[_stacks - 1][i].glVertex();
     }
     glEnd();
