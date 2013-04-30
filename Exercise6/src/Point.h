@@ -1,7 +1,9 @@
 #ifndef POINT_H_
 #define POINT_H_
 
+#include <iostream>
 #include <GL/glut.h>
+
 
 struct Point
 {
@@ -18,6 +20,9 @@ struct Point
     // OpenGL helpers
     void glVertex() const { glVertex3d(X, Y, Z); }
     void glNormal() const { glNormal3d(X, Y, Z); }
+
+    // printer
+    friend std::ostream& operator<<(std::ostream& os, const Point& dt);
 };
 
 #endif // POINT_H_

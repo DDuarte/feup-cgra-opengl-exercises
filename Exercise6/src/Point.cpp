@@ -24,3 +24,9 @@ Point Point::GetNormalized() const
     double length = sqrt(X * X + Y * Y + Z * Z);
     return Point(X / length, Y / length, Z / length);
 }
+
+std::ostream& operator<<(std::ostream& os, const Point& p)
+{
+    os << "[" << p.X << ", " << p.Y << ", " << p.Z << "]";
+    return os;
+}

@@ -16,6 +16,8 @@ private:
     std::vector<std::vector<Point>> _vertices;
     int _stacks;
 
+    std::vector<Point> _normals;
+
     Point _position;
     float _angle;
     float _radAngle;
