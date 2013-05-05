@@ -53,6 +53,8 @@ public:
     CGFappearance* woodAppearance;
 
     std::vector<int> lightsSwitcher;
+    int currentRobotTexture;
+    int drawMode;
 
 public:
     void PauseRebootClock() { clock->PauseReboot(); }

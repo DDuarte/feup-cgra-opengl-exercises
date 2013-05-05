@@ -3,7 +3,7 @@
 #include "CGFapplication.h"
 #include "myTable.h"
 #include "Plane.h"
-
+#include <cassert>
 
 #include <GL/glext.h> // needed for gl_clamp_to_edge on Windows
 
@@ -127,6 +127,9 @@ void LightingScene::init()
     clock = new myClock();
     plane = new myAirplane();
 
+    drawMode = 0; // default rendering mode (textured)
+
+    currentRobotTexture = 0; // default texture
     robot = new MyRobot(10);
 
     ////Declares materials
@@ -230,6 +233,25 @@ void LightingScene::display()
     axis.draw();
 
     // ---- END Background, camera and axis setup
+
+    int mode = -1;
+
+    switch (drawMode)
+    {
+    case 0:
+        mode = GL_FILL;
+        break;
+    case 1:
+        mode = GL_LINE;
+        break;
+    case 2:
+        mode = GL_POINT;
+        break;
+    default:
+        assert(false && "Undefined mode.");
+    }
+
+    glPolygonMode(GL_FRONT_AND_BACK, mode);
 
     // ---- BEGIN Primitive drawing section
     //First Chair

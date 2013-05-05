@@ -11,6 +11,14 @@
 #define ANGLE_INC 5.0f
 #define POS_INC 0.5f
 
+#define MAX_ROBOT_TEXTURES 3
+static const char* AVAILABLE_ROBOT_TEXTURES[MAX_ROBOT_TEXTURES] =
+{
+    "robot1.jpg",
+    "robot2.jpg",
+    "robot3.jpg"
+};
+
 class MyRobot : public CGFobject
 {
 private:
@@ -23,7 +31,8 @@ private:
     float _angle;
     float _radAngle;
 
-    CGFappearance* _skin;
+    CGFappearance* _skins[MAX_ROBOT_TEXTURES];
+    int _currentSkin;
 
 public:
     MyRobot(int stacks);
@@ -39,6 +48,8 @@ public:
     const Point& GetPosition() const { return  _position; }
 
     void SetAngle(float angle) { _angle = angle; _radAngle = rad(angle); }
+
+    void SetSkin(int skin) { _currentSkin = skin; }
 
     virtual void draw() override;
 };

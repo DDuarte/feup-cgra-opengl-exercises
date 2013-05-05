@@ -41,6 +41,7 @@ Set Normal.x to Sum of Normal.x and (multiply (Current.y minus Next.y) by (Curre
     Returning Normalize(Normal)
 
     End Function
-    */
+
+*/
 
 #endif // NEWELLSMETHOD_H_

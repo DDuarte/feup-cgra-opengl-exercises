@@ -15,11 +15,15 @@ float shininessR = 10.f;
 
 MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 {
-    _skin = new CGFappearance("robot1.jpg", GL_CLAMP, GL_CLAMP);
-    _skin->setAmbient(ambR);
-    _skin->setDiffuse(difR);
-    _skin->setSpecular(specR);
-    _skin->setShininess(shininessR);
+    _currentSkin = 0;
+    for (int i = 0; i < MAX_ROBOT_TEXTURES; ++i)
+    {
+        _skins[i] = new CGFappearance(AVAILABLE_ROBOT_TEXTURES[i], GL_CLAMP, GL_CLAMP);
+        _skins[i]->setAmbient(ambR);
+        _skins[i]->setDiffuse(difR);
+        _skins[i]->setSpecular(specR);
+        _skins[i]->setShininess(shininessR);
+    }
 
     SetAngle(200.0f);
     _vertices.resize(_stacks);
@@ -67,9 +71,9 @@ MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 
     double x, y, z;
 
-    for (int i = 0 ; i < _vertices.size() - 1; ++i)
+    for (unsigned int i = 0 ; i < _vertices.size() - 1; ++i)
     {
-        for (int j = 0 ; j < _vertices[i].size(); ++j)
+        for (unsigned int j = 0 ; j < _vertices[i].size(); ++j)
         {
             p = _vertices[i][j];
 
@@ -105,12 +109,13 @@ MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 
 MyRobot::~MyRobot()
 {
-    delete _skin;
+    for (int i = 0; i < MAX_ROBOT_TEXTURES; ++i)
+        delete _skins[i];
 }
 
 void MyRobot::draw()
 {
-    _skin->apply();
+    _skins[_currentSkin]->apply();
 
     // base (square)
     glBegin(GL_QUADS);
