@@ -23,9 +23,8 @@ class MyRobot : public CGFobject
 {
 private:
     std::vector<std::vector<Point>> _vertices;
+    std::vector<std::vector<Point>> _normals;
     int _stacks;
-
-    std::vector<Point> _normals;
 
     Point _position;
     float _angle;

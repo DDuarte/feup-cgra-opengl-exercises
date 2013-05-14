@@ -12,6 +12,7 @@
 #include "myClock.h"
 #include "myAirPlane.h"
 #include "MyRobot.h"
+#include "myImpostorWall.h"
 
 class LightingScene : public CGFscene
 {
@@ -27,6 +28,7 @@ public:
     CGFlight* light4;
 
     MyRobot* robot;
+    myImpostorWall* impostor;
 
     mySphere* sphere;
     myCylinder* column;

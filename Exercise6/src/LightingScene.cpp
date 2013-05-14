@@ -132,6 +132,8 @@ void LightingScene::init()
     currentRobotTexture = 0; // default texture
     robot = new MyRobot(10);
 
+    impostor = new myImpostorWall();
+
     ////Declares materials
     materialA = new CGFappearance(ambA,difA,specA,shininessA);
     materialB = new CGFappearance(ambB,difB,specB,shininessB);
@@ -252,7 +254,7 @@ void LightingScene::display()
     }
 
     glPolygonMode(GL_FRONT_AND_BACK, mode);
-
+    
     // ---- BEGIN Primitive drawing section
     //First Chair
     //glPushMatrix();
@@ -375,6 +377,17 @@ void LightingScene::display()
     robot->draw();
     glPopMatrix();
 
+ 
+      /*
+    glPushMatrix();  /*
+    glTranslated(0,4,7.5);
+    glRotated(-90.0,0,0,1);
+    glRotated(90.0,0,1,0);
+    glScaled(15,0.2,8);
+    windowAppearance->apply();
+    impostor->draw(windowS, windowT);
+    glPopMatrix();
+    */
     // ---- END Primitive drawing section
 
 
@@ -416,6 +429,7 @@ LightingScene::~LightingScene()
     delete(clock);
     delete(plane);
     delete(robot);
+    delete(impostor);
 }
 
 void LightingScene::update(unsigned long millis)

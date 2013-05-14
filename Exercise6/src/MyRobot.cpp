@@ -27,6 +27,7 @@ MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 
     SetAngle(200.0f);
     _vertices.resize(_stacks);
+    _normals.resize(_stacks);
     Point p;
     p.Y = YBASE;
     p.X = -0.5;
@@ -91,18 +92,56 @@ MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 
     // calculate normals
 
-    std::vector<Point> points(4);
+    std::vector<Point> points;
 
     for (int i = 0; i < _stacks; ++i)
     {
         for (int j = 0; j < SLICES; ++j)
         {
-            points[0] = _vertices[i][j];
-            points[1] = _vertices[i][(j + 1) % SLICES];
-            points[2] = _vertices[(i + 1) % _stacks][(j + 1) % SLICES];
-            points[3] = _vertices[(i + 1) % _stacks][j];
+            if (i != 0 && i != _stacks - 1)
+            {
+                points.push_back(_vertices[(i + 1) % _stacks][(j + 1) % SLICES]);
+                points.push_back(_vertices[(i + 1) % _stacks][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+                points.push_back(_vertices[(i - 1) < 0 ? _stacks - 1 : i - 1][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+                points.push_back(_vertices[(i - 1) < 0 ? _stacks - 1 : i - 1][(j + 1) % SLICES]);
+                //points.push_back(_vertices[i][j]);
+            }
+            else if (i == _stacks - 1)
+            {
+                //points.push_back(_vertices[i][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+                points.push_back(_vertices[i][j]);
+                points.push_back(Point(0, YBASE + 1, 0));
+                //points.push_back(_vertices[i][(j + 1) % SLICES]);
+                
+            }
+            else if (i == 0)
+            {
+                //points.push_back(_vertices[i][(j + 1) % SLICES]);
+                points.push_back(_vertices[i][j]);
+                points.push_back(Point(0, YBASE, 0));
+                //points.push_back(_vertices[i][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+            }
 
-            _normals.push_back(CalculateSurfaceNormal(points));
+            /*
+                        else if (i == _stacks - 1)
+                        {
+                            points.push_back(_vertices[(i - 1) < 0 ? _stacks - 1 : i - 1][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+                            points.push_back(_vertices[(i - 1) < 0 ? _stacks - 1 : i - 1][(j + 1) % SLICES]);
+
+                            for (int k = 0; k < 12; ++k)
+                                points.push_back(_vertices[_stacks - 1][k]);
+            }
+                        else if (i == 0)
+                        {
+                            points.push_back(_vertices[(i + 1) % _stacks][(j + 1) % SLICES]);
+                            points.push_back(_vertices[(i + 1) % _stacks][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+                            for (int k = 0; k < 12; ++k)
+                                points.push_back(_vertices[0][k]);
+                        }
+                        */
+
+            _normals[i].push_back(CalculateSurfaceNormal(points));
+            points.clear();
         }
     }
 }
@@ -137,9 +176,8 @@ void MyRobot::draw()
     }
     glEnd();
 
-    std::vector<Point> points(4);
-
 #define helper(i, j) glTexCoord2f(0.5 + _vertices[i][j].X, 0.5 - _vertices[i][j].Z); \
+                   _normals[i][j].glNormal();  \
                    _vertices[i][j].glVertex();
 
     // sides
@@ -148,7 +186,6 @@ void MyRobot::draw()
         for (int j = 0; j < SLICES; ++j)
         {
             glBegin(GL_POLYGON);
-            _normals[i * SLICES + j].glNormal();
 
             helper(i, j);
             helper(i, (j + 1) % SLICES);

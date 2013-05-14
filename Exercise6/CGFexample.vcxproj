@@ -77,6 +77,7 @@
     <ClCompile Include="src\myClockHand.cpp" />
     <ClCompile Include="src\myComplexLamp.cpp" />
     <ClCompile Include="src\myCylinder.cpp" />
+    <ClCompile Include="src\myImpostorWall.cpp" />
     <ClCompile Include="src\myLamp.cpp" />
     <ClCompile Include="src\MyRobot.cpp" />
     <ClCompile Include="src\mySphere.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="src\myClockHand.h" />
     <ClInclude Include="src\myComplexLamp.h" />
     <ClInclude Include="src\myCylinder.h" />
+    <ClInclude Include="src\myImpostorWall.h" />
     <ClInclude Include="src\myLamp.h" />
     <ClInclude Include="src\MyRobot.h" />
     <ClInclude Include="src\mySphere.h" />
