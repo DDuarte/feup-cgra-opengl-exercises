@@ -101,10 +101,10 @@ MyRobot::MyRobot(int stacks) : _position(10.0f, 0.5f, 8.0f), _stacks(stacks + 1)
 			
 			if (i != 0 && i != _stacks - 1) // Middle
 			{
-				points.push_back(_vertices[(i + 1) % _stacks][(j + 1) % SLICES]);
-				points.push_back(_vertices[(i + 1) % _stacks][(j - 1) < 0 ? SLICES - 1 : j - 1]);
-				points.push_back(_vertices[(i - 1) < 0 ? _stacks - 1 : i - 1][(j - 1) < 0 ? SLICES - 1 : j - 1]);
-				points.push_back(_vertices[(i - 1) < 0 ? _stacks - 1 : i - 1][(j + 1) % SLICES]);
+				points.push_back(_vertices[i + 1][(j + 1) % SLICES]);
+				points.push_back(_vertices[i + 1][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+				points.push_back(_vertices[i - 1][(j - 1) < 0 ? SLICES - 1 : j - 1]);
+				points.push_back(_vertices[i - 1][(j + 1) % SLICES]);
 			}
 			else if (i == _stacks - 1) // Top
 			{
