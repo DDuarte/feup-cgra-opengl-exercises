@@ -53,7 +53,7 @@ void TPinterface::initGUI()
 
     GLUI_Panel* lightsPanel = addPanel("Luzes");
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 6; ++i)
         addCheckboxToPanel(lightsPanel, const_cast<char*>((std::string("Luz ") + std::to_string(i + 1)).c_str()), &((LightingScene*) scene)->lightsSwitcher[i]);
 
     addColumn();

@@ -15,7 +15,7 @@ float deg2rad=pi/180.0;
 #define BOARD_HEIGHT 6.0
 #define BOARD_WIDTH 6.4
 
-#define LIGHT_COUNT 5
+#define LIGHT_COUNT 6
 
 // Positions for two lights
 float light0_pos[4] = {4, 6.0, 1.0, 1.0};
@@ -24,6 +24,7 @@ float light1_pos[4] = {10.5, 6.0, 1.0, 1.0};
 float light2_pos[4] = {10.5, 6.0, 5.0, 1.0};
 float light3_pos[4] = {4, 6.0, 5.0, 1.0};
 float light4_pos[4] = {1.0, 4.0, 7.5, 1.0};
+float light5_pos[4] = {-25.0, 4.0, 7.5, 1.0};
 
 // Global ambient light (do not confuse with ambient component of individual lights)
 float globalAmbientLight[4]= {0.0,0.0,0.0,1.0}; //{0.2,0.2,0.2,1.0};
@@ -64,6 +65,10 @@ float shininessC = 5.f;
 
 float ambientNull[4]={0,0,0,1};
 float yellow[4]={1,1,0,1};
+
+float bgAmbient[4] = { 0, 0, 0, 1 };
+float bgDiffuse[4] = { 1, 1, 1, 10 };
+float bgSpecular[4] = { 1, 1, 1, 10 };
 
 void LightingScene::init()
 {
@@ -108,6 +113,12 @@ void LightingScene::init()
     light4->setKl(1.0f);
     light4->setKq(0.0f);
     light4->enable();
+
+	light5 = new CGFlight(GL_LIGHT5, light5_pos);
+	light5->setAmbient(bgAmbient);
+	light5->setDiffuse(bgDiffuse);
+	light5->setSpecular(bgSpecular);
+	light5->enable();
 
     // Uncomment below to enable normalization of lighting normal vectors
     glEnable(GL_NORMALIZE);
@@ -189,6 +200,12 @@ void LightingScene::init()
     woodAppearance->setSpecular(specF);
     woodAppearance->setShininess(shininessF);
 
+	backGroundAppearance = new CGFappearance("background.jpg", GL_CLAMP, GL_CLAMP);
+	backGroundAppearance->setAmbient(ambF);
+	backGroundAppearance->setDiffuse(difF);
+	backGroundAppearance->setSpecular(specF);
+	backGroundAppearance->setShininess(shininessF);
+
     for (int i = 0; i < LIGHT_COUNT; ++i)
         lightsSwitcher.push_back(1); // on
 
@@ -224,36 +241,19 @@ void LightingScene::display()
     lightsSwitcher[2] ? light2->enable() : light2->disable();
     lightsSwitcher[3] ? light3->enable() : light3->disable();
     lightsSwitcher[4] ? light4->enable() : light4->disable();
+	lightsSwitcher[5] ? light5->enable() : light5->disable();
 
     light0->update();
     light1->update();
     light2->update();
     light3->update();
     light4->update();
+	light5->update();
 
     // Draw axis
     axis.draw();
 
     // ---- END Background, camera and axis setup
-
-    int mode = -1;
-
-    switch (drawMode)
-    {
-    case 0:
-        mode = GL_FILL;
-        break;
-    case 1:
-        mode = GL_LINE;
-        break;
-    case 2:
-        mode = GL_POINT;
-        break;
-    default:
-        assert(false && "Undefined mode.");
-    }
-
-    glPolygonMode(GL_FRONT_AND_BACK, mode);
     
     // ---- BEGIN Primitive drawing section
     //First Chair
@@ -291,13 +291,22 @@ void LightingScene::display()
 
     //LeftWall
     glPushMatrix();
-    glTranslated(0,4,7.5);
-    glRotated(-90.0,0,0,1);
-    glRotated(90.0,0,1,0);
-    glScaled(15,0.2,8);
+	glTranslated(0,0,15);
+	glRotated(90,0,1,0);
+    glScaled(15,8,0.2);
     windowAppearance->apply();
-    wall->draw(windowS, windowT);
+    impostor->draw(windowS, windowT);
     glPopMatrix();
+
+	//"Background"
+	glPushMatrix();
+	glTranslated(-30,12,7.5);
+	glRotated(-90.0,0,0,1);
+	glRotated(90.0,0,1,0);
+	glScaled(75,0.2,40);
+	backGroundAppearance->apply();
+	wall->draw(defaultS, defaultT);
+	glPopMatrix();
 
     //PlaneWall
     glPushMatrix();
@@ -307,7 +316,6 @@ void LightingScene::display()
     materialW->apply();
     wall->draw(defaultS, defaultT);
     glPopMatrix();
-
 
     // Board A
     glPushMatrix();
@@ -347,14 +355,14 @@ void LightingScene::display()
     //glPopMatrix();
 
     //Globe
-    //glPushMatrix();
-    //glTranslated(4.0, 4.5, 8.0);
-    //glRotated(-90.0, 0.0, 1.0, 0.0);
-    //glRotated(180, 0.0, 0.0, 1.0);
-    //glScaled(0.5, 0.5, 0.5);
-    //earthAppearance->apply();
-    //sphere->draw();
-    //glPopMatrix();
+    glPushMatrix();
+    glTranslated(4.0, 4.3, 8.0);
+    glRotated(-90.0, 0.0, 1.0, 0.0);
+    glRotated(180, 0.0, 0.0, 1.0);
+    glScaled(0.5, 0.5, 0.5);
+    earthAppearance->apply();
+    sphere->draw();
+    glPopMatrix();
 
     //Clock
     glPushMatrix();
@@ -371,23 +379,34 @@ void LightingScene::display()
     //glPopMatrix();
 
     //Robot
+
+	int mode = -1;
+
+	switch (drawMode)
+	{
+	case 0:
+		mode = GL_FILL;
+		break;
+	case 1:
+		mode = GL_LINE;
+		break;
+	case 2:
+		mode = GL_POINT;
+		break;
+	default:
+		assert(false && "Undefined mode.");
+	}
+
+	glPolygonMode(GL_FRONT_AND_BACK, mode);
+
     glPushMatrix();
     glTranslatef(robot->GetPosition().X, robot->GetPosition().Y, robot->GetPosition().Z);
     glRotatef(robot->GetAngle(), 0.0f, 1.0f, 0.0f);
     robot->draw();
     glPopMatrix();
 
- 
-      /*
-    glPushMatrix();  /*
-    glTranslated(0,4,7.5);
-    glRotated(-90.0,0,0,1);
-    glRotated(90.0,0,1,0);
-    glScaled(15,0.2,8);
-    windowAppearance->apply();
-    impostor->draw(windowS, windowT);
-    glPopMatrix();
-    */
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
     // ---- END Primitive drawing section
 
 
@@ -404,6 +423,7 @@ LightingScene::~LightingScene()
     delete(light2);
     delete(light3);
     delete(light4);
+	delete(light5);
 
     delete(sphere);
     delete(column);
@@ -426,6 +446,7 @@ LightingScene::~LightingScene()
     delete(fancyAppearance);
     delete(earthAppearance);
     delete(woodAppearance);
+	delete(backGroundAppearance);
     delete(clock);
     delete(plane);
     delete(robot);

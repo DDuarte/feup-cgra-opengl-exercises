@@ -26,6 +26,7 @@ public:
     CGFlight* light2;
     CGFlight* light3;
     CGFlight* light4;
+	CGFlight* light5;
 
     MyRobot* robot;
     myImpostorWall* impostor;
@@ -53,6 +54,7 @@ public:
     CGFappearance* fancyAppearance;
     CGFappearance* earthAppearance;
     CGFappearance* woodAppearance;
+	CGFappearance* backGroundAppearance;
 
     std::vector<int> lightsSwitcher;
     int currentRobotTexture;
