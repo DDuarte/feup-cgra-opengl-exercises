@@ -206,6 +206,12 @@ void LightingScene::init()
 	backGroundAppearance->setSpecular(specF);
 	backGroundAppearance->setShininess(shininessF);
 
+	nightAppearance = new CGFappearance("night.jpg", GL_CLAMP, GL_CLAMP);
+	nightAppearance->setAmbient(ambF);
+	nightAppearance->setDiffuse(difF);
+	nightAppearance->setSpecular(specF);
+	nightAppearance->setShininess(shininessF);
+
     for (int i = 0; i < LIGHT_COUNT; ++i)
         lightsSwitcher.push_back(1); // on
 
@@ -236,12 +242,14 @@ void LightingScene::display()
     // Apply transformations corresponding to the camera position relative to the origin
     CGFscene::activeCamera->applyView();
 
+	CGFappearance *ptr;
     lightsSwitcher[0] ? light0->enable() : light0->disable();
     lightsSwitcher[1] ? light1->enable() : light1->disable();
     lightsSwitcher[2] ? light2->enable() : light2->disable();
     lightsSwitcher[3] ? light3->enable() : light3->disable();
     lightsSwitcher[4] ? light4->enable() : light4->disable();
 	lightsSwitcher[5] ? light5->enable() : light5->disable();
+	lightsSwitcher[5] ? ptr = backGroundAppearance : ptr = nightAppearance;
 
     light0->update();
     light1->update();
@@ -304,7 +312,7 @@ void LightingScene::display()
 	glRotated(-90.0,0,0,1);
 	glRotated(90.0,0,1,0);
 	glScaled(75,0.2,40);
-	backGroundAppearance->apply();
+	ptr->apply();
 	wall->draw(defaultS, defaultT);
 	glPopMatrix();
 
@@ -447,6 +455,7 @@ LightingScene::~LightingScene()
     delete(earthAppearance);
     delete(woodAppearance);
 	delete(backGroundAppearance);
+	delete(nightAppearance);
     delete(clock);
     delete(plane);
     delete(robot);

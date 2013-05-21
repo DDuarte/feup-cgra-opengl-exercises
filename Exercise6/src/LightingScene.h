@@ -55,6 +55,7 @@ public:
     CGFappearance* earthAppearance;
     CGFappearance* woodAppearance;
 	CGFappearance* backGroundAppearance;
+	CGFappearance* nightAppearance;
 
     std::vector<int> lightsSwitcher;
     int currentRobotTexture;
