@@ -14,7 +14,7 @@ void LineTool::mousePressed(int x, int y)
 	canvas->setColor(255);
 
 	// Draw first line (one pixel)
-	drawLine(sx,sy,currx,curry);
+	canvas->setPixel(sx,sy);
 }
 
 void LineTool::mouseDragged(int x, int y)
@@ -35,7 +35,7 @@ void LineTool::mouseReleased(int x, int y)
 	// Redraw previous line to erase it
 	drawLine(sx,sy,currx,curry);
 
-	// Set normal mode and color to draw fianl line
+	// Set normal mode and color to draw final line
 	canvas->setNormalMode();
 	canvas->setColor(0);
 
