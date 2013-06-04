@@ -1,4 +1,5 @@
 #include "LineTool.h"
+#include <cmath>
 
 void LineTool::mousePressed(int x, int y)
 {
@@ -46,17 +47,34 @@ void LineTool::mouseReleased(int x, int y)
 
 void LineTool::drawLine(int xi, int yi, int xf, int yf)
 {
-	// draws a line; 
-	// simple flawed version, only draws in quadrants 1 and 4, 
-	// and iterates over x, meaning there will be gaps on octants 2 and 7
-	// where abs(delta y) > abs(delta x)
+	//deltas
+	int dx = abs(xf - xi);
+	int dy = abs(yf - yi);
 
-	float m;
-	if (xf!=xi)
-		m=(float) (yf-yi)/(float)(xf-xi);
-	else
-		m=0;
+	//sinal
+	int sx = xi < xf ? 1 : -1;
+	int sy = yi < yf ? 1 : -1;
 
-	for (int x=xi;x<=xf;x++)
-		canvas->setPixel(x,yi+(x-xi)*m);
+	int err = dx - dy;
+
+	while (xi != xf || yi != yf)
+	{
+		canvas->setPixel(xi, yi);
+
+		int e2 = 2 * err;
+		if (e2 > -dy)
+		{
+			err -= dy;
+			xi += sx;
+		}
+
+		if (xi == xf && yi == yf)
+			canvas->setPixel(xi, yi);
+
+		else if (e2 < dx)
+		{
+			err += dx;
+			yi += sy;
+		}
+	}
 }
