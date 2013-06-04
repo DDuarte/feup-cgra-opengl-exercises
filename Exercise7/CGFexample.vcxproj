@@ -17,6 +17,7 @@
     <ClCompile Include="src\CGFcanvas.cpp" />
     <ClCompile Include="src\CircleTool.cpp" />
     <ClCompile Include="src\ClearTool.cpp" />
+    <ClCompile Include="src\FillTool.cpp" />
     <ClCompile Include="src\LineTool.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PointTool.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="src\CGFcanvas.h" />
     <ClInclude Include="src\CircleTool.h" />
     <ClInclude Include="src\ClearTool.h" />
+    <ClInclude Include="src\FillTool.h" />
     <ClInclude Include="src\LineTool.h" />
     <ClInclude Include="src\PointTool.h" />
   </ItemGroup>

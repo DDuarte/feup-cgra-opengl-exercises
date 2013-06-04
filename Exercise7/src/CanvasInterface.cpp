@@ -6,6 +6,7 @@
 #include "LineTool.h"
 #include "ClearTool.h"
 #include "CircleTool.h"
+#include "FillTool.h"
 
 void CanvasInterface::convertCoords(int *x, int *y)
 {
@@ -50,6 +51,7 @@ void CanvasInterface::initGUI()
 	tools[1]=new LineTool(((CanvasScene*)scene)->canvas);
     tools[2]=new ClearTool(((CanvasScene*)scene)->canvas);
 	tools[3]=new CircleTool(((CanvasScene*)scene)->canvas);
+    tools[4]=new FillTool(((CanvasScene*)scene)->canvas);
 	// you may add more tools here, provided that you:
 	//	 - adjust the value of TOOL_SIZE in the header file 
 	//	 - add "includes" to the corresponding tools in the top of this file
@@ -65,6 +67,7 @@ void CanvasInterface::initGUI()
 	addRadioButtonToGroup(toolRG,"Line");
     addRadioButtonToGroup(toolRG,"Clear");
 	addRadioButtonToGroup(toolRG,"Circle");
+    addRadioButtonToGroup(toolRG,"Fill");
 	// if you add more tools above, you should add a radio button in the same order here
 
 	// select the radio button corresponding to the default tool
