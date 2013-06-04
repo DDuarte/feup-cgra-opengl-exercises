@@ -5,7 +5,7 @@
 #include "CanvasTool.h"
 
 // Adjust below for adding more tools
-#define TOOL_SIZE 2
+#define TOOL_SIZE 3
 
 class CanvasInterface: public CGFinterface {
 

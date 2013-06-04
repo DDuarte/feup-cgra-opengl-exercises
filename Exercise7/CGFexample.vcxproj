@@ -15,6 +15,7 @@
     <ClCompile Include="src\CanvasInterface.cpp" />
     <ClCompile Include="src\CanvasScene.cpp" />
     <ClCompile Include="src\CGFcanvas.cpp" />
+    <ClCompile Include="src\ClearTool.cpp" />
     <ClCompile Include="src\LineTool.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PointTool.cpp" />
@@ -25,6 +26,7 @@
     <ClInclude Include="src\CanvasScene.h" />
     <ClInclude Include="src\CanvasTool.h" />
     <ClInclude Include="src\CGFcanvas.h" />
+    <ClInclude Include="src\ClearTool.h" />
     <ClInclude Include="src\LineTool.h" />
     <ClInclude Include="src\PointTool.h" />
   </ItemGroup>
